@@ -57,6 +57,8 @@ def find_bug_fixes(issue_path, gitlog_path, gitlog_pattern):
 
     print('Total issues: ' + str(len(issue_list)))
     print('Issues matched to a bugfix: ' + str(len(issue_list) - len(no_matches)))
+    if len(issue_list) == 0:
+        return issue_list
     print('Percent of issues matched to a bugfix: ' + \
           str((len(issue_list) - len(no_matches)) / len(issue_list)))
     for key in no_matches:

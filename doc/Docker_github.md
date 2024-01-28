@@ -6,7 +6,7 @@ Build the docker image that works with GitHub:
 docker build -t szz_github -f Dockerfile_github .
 ```
 
-Then you can run the sample automation script `pipeline.py` that expects a list of projects in `entree/Projects.csv`. This example will calculate the correlation of the detected bugs with the size of the files where they're located. It uses a Pharo image in part of the steps, so you must install Pharo (see below). You must have a variable GITHUB_TOKEN defined in your environment, because it accesses the GitHub API. Get a token following [these instructions](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens).
+Then you can run the sample automation script `pipeline.py` that expects a list of projects in `entree/Projects.csv`. The first column represent the HTTPS url and the second the latest commit you wish to begin the analysis on. This example will calculate the correlation of the detected bugs with the size of the files where they're located. It uses a Pharo image in part of the steps, so you must install Pharo (see below). You must have a variable GITHUB_TOKEN defined in your environment, because it accesses the GitHub API. Get a token following [these instructions](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens).
 
 The docker image is run from `pipeline.py`, which is the main driver of the analysis.
 

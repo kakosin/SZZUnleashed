@@ -29,3 +29,9 @@ szz/gradle.properties
 .gradle
 
 model/data
+sortie
+
+# Ignore local env files
+.venv
+std*
+*.env
