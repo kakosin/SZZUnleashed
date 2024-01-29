@@ -60,6 +60,7 @@ with open('/input/Projects.csv', newline="") as csvfile:
                         raise SystemExit(result.returncode)
                 except (SystemExit, subprocess.TimeoutExpired) as e:
                     print(e)
+                    continue
             else:
                 print("Repo already exists")
         except (Exception, UnicodeDecodeError) as e:
@@ -129,3 +130,4 @@ with open('/input/Projects.csv', newline="") as csvfile:
                 raise SystemExit(result.returncode)
         except (Exception, subprocess.TimeoutExpired) as e:
             print(e)
+            continue
