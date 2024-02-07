@@ -101,31 +101,7 @@ def run_pipeline():
                         print("modèle Pharo en cours...")
                         print("exécution de la commande pharo suivante",command)
                         subprocess.run(command, shell=True)
-            #     else:
-            #         print("Invalid URL format:", url)
-            # else:
-            #     print("Invalid row format:", row)
-                
-    # with open(projects_csv_path, newline="") as csvfile:
-    #     for row in csv.reader(csvfile):
-    #         if len(row) >= 2:
-    #             url, Commit = row
-    #             url_parts = url.split('/')
-    #             if len(url_parts) >= 5:
-    #                 github_owner, github_repo = url_parts[3:5]
-    #                 print(f"URL: {url}, Commit: {Commit}")
-    #                 print(f"GitHub Owner: {github_owner}, GitHub Repo: {github_repo}")          
-                
-                    
-                    
-                    # Variable pour le chemin du fichier CSV
-                    #csv_path = rf'{local_root}/sortie/results/{github_owner}__{github_repo}/modele_{github_repo}.csv'
-                    
-                    # Vérifier si le fichier csv_path existe
-                    #if  os.path.isfile(csv_path):
-                    #    print(f"Le fichier {csv_path} n'existe pas.")
-                    #    continue  # Passer au traitement du fichier suivant
-                    
+
                         #Essayer d'ouvrir le fichier csv_path
                         try:
                             modele = pd.DataFrame(pd.read_csv(csv_path))

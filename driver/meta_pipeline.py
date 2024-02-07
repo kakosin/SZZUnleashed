@@ -10,9 +10,9 @@ import time
 
 ACTUAL_RESULTS_COUNT = 0
 NEEDED_RESULTS_COUNT = 100
-BLACKLIST = ["apollo-client","lobe-chat", "kibana", "vee-validate"]
+BLACKLIST = ["apollo-client","lobe-chat", "kibana", "vee-validate","misskey", "keystone"]
 
-page = 11
+page = 17
 while ACTUAL_RESULTS_COUNT < NEEDED_RESULTS_COUNT+1:
     # Crawl projects to throw in pipeline
     print("Looking for repositories...")
