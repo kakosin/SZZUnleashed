@@ -58,4 +58,4 @@ allModelClasses do: [ :class |
     ].
 ].
 
-Smalltalk snapshot: true andQuit: true.
+Smalltalk snapshot: false andQuit: true.

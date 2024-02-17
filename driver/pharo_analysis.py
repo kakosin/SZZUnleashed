@@ -12,4 +12,7 @@ def load_model(model_path):
 
 def analyse_model(model_path, metrics_folder):
     command_analyse_model = fr'"{vm_path}" "{Pharo_path}" st {model_analyse_st} "{model_path}" "{metrics_folder}"'
-    subprocess.run(command_analyse_model, shell=True)
+    try:
+        subprocess.run(command_analyse_model, shell=True, timeout=10)
+    except subprocess.TimeoutExpired as e:
+        return

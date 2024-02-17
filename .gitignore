@@ -30,6 +30,9 @@ szz/gradle.properties
 
 model/data
 sortie
+analysis
+bug_reports
+metrics
 
 # Ignore local env files
 .venv

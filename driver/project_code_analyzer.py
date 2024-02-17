@@ -3,8 +3,11 @@ import json
 import csv
 
 def process_json_file(json_file_path, output_dir):
-    with open(json_file_path, 'r', encoding='utf-8') as json_file:
-        json_data = json.load(json_file)
+    try:
+        with open(json_file_path, 'r', encoding='utf-8') as json_file:
+            json_data = json.load(json_file)
+    except json.decoder.JSONDecodeError as e:
+        return
 
     filtered_data = [item for item in json_data if item.get('FM3') == 'FamixTypeScript.Class']
     fields = ['fileName', 'name', 'methods']

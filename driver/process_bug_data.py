@@ -33,8 +33,7 @@ def save_to_csv(file_data, csv_file_path):
         for file_name, bug_indicator in file_data.items():
             writer.writerow([file_name, bug_indicator])
 
-def process_folders(root_folder):
-    bug_reports_dir = os.path.join(os.path.dirname(root_folder), 'bug_reports')
+def process_folders(root_folder, bug_reports_dir):
     if not os.path.exists(bug_reports_dir):
         os.makedirs(bug_reports_dir)
         
