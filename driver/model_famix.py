@@ -7,6 +7,7 @@ git_folder_path = os.path.join(local_root, "sortie/git/")
 BLACKLIST = ['redis__ioredis']
 
 def produce_model():
+    model_filepaths = []
     for root, dirs, files in os.walk(backup_results_path):
         for dir in dirs:
             if dir in BLACKLIST:
@@ -28,11 +29,11 @@ def produce_model():
                         continue
                 else:
                     print("Repo already exists")
-                    continue
             except (Exception, UnicodeDecodeError) as e:
                 print(e)
                 continue
             model_filepath = os.path.join(backup_results_path, dir, dir+"_ts2famix.json")
+            model_filepaths.append(model_filepath)
             tsconfig_filepath = os.path.join(git_project_path, "tsconfig.json")
             if os.path.exists(model_filepath):
                 continue
@@ -50,6 +51,4 @@ def produce_model():
                 print("Produced ts-morph model for repo: "+dir)
             else:
                 print("No ts-morph model available")
-
-
-produce_model()
+    return model_filepaths

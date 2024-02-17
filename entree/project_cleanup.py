@@ -38,5 +38,3 @@ def prepare_results():
                 shutil.copytree(project_path, os.path.join(modeled_results_path, dir))
             except (PermissionError,FileExistsError) as e:
                 print(e)
-
-prepare_results()

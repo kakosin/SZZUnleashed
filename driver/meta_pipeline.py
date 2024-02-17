@@ -3,27 +3,26 @@ import os
 import shutil
 import sys
 sys.path.append('D:/dev/ETS/mgl843/SZZUnleashed/')
-from entree import project_crawler
-from entree import project_cleanup
-from driver import pipeline
+from entree import project_crawler, project_cleanup
+from driver import pipeline, model_famix, pharo_analysis, project_code_analyzer, process_bug_data
 import time
 
 ACTUAL_RESULTS_COUNT = 0
 NEEDED_RESULTS_COUNT = 100
 BLACKLIST = ["apollo-client","lobe-chat", "kibana", "vee-validate","misskey", "keystone"]
 
-page = 17
+page = 1
 while ACTUAL_RESULTS_COUNT < NEEDED_RESULTS_COUNT+1:
     # Crawl projects to throw in pipeline
     print("Looking for repositories...")
-    repositories = project_crawler.search_github_repositories(project_crawler.QUERY, page=page)
+    repositories = project_crawler.search_github_repositories(project_crawler.QUERY, page=page, per_page=per_age)
     project_crawler.write_to_csv(repositories, BLACKLIST)
     print("Added repositories!")
 
-    # Run pipeline for batch of projects
-    print("Running bug analysis + Pharo pipeline...")
-    pipeline.run_pipeline()
-    print("done running bug analysis + Pharo pipeline...")
+#     # Run pipeline for batch of projects
+#     # print("Running bug analysis + Pharo pipeline...")
+#     # pipeline.run_pipeline()
+#     # print("done running bug analysis + Pharo pipeline...")
 
     # Prepare results
     time.sleep(2.5)
@@ -33,9 +32,41 @@ while ACTUAL_RESULTS_COUNT < NEEDED_RESULTS_COUNT+1:
     page+=1
     print(f"Found {ACTUAL_RESULTS_COUNT} coherent results...")
 
-if os.path.exists("results.zip"):
-    shutil.rmtree("results.zip")
-shutil.make_archive("results", 'zip', project_cleanup.backup_results_path)
-if os.path.exists("G:/My Drive/Education/ETS/Master's/Courses/MGL843/Collab/results.zip"):
-    shutil.rmtree("G:/My Drive/Education/ETS/Master's/Courses/MGL843/Collab/results.zip")
-shutil.copy("results.zip", "G:/My Drive/Education/ETS/Master's/Courses/MGL843/Collab")
+# print("Producing ts2famix models...")
+model_filepaths = model_famix.produce_model()
+print("Loading model in Pharo")
+if not os.path.exists("metrics/"):
+    os.mkdir("metrics")
+for model_filepath in model_filepaths:
+    if os.path.exists(model_filepath):
+        elements = model_filepath.split("/")
+        metrics_folder = f"metrics/{elements[len(elements)-2]}/"
+        if not os.path.exists(metrics_folder):
+            os.mkdir(metrics_folder)
+        pharo_analysis.analyse_model(model_filepath, metrics_folder)
+
+# Analyze SZZ JSON files
+local_root = r"D:/dev/ETS/mgl843/SZZUnleashed"
+root_folder = os.path.join(local_root, "sortie/backup_results/")
+filenames = ['annotations.json','fix_and_introducers_pairs.json','commits.json']
+output_dir = os.path.join(local_root, "analysis/")
+for subdir, dirs, files in os.walk(root_folder):
+    for dir in dirs:
+        project_dir = os.path.join(root_folder, dir)
+        model_filepath = os.path.join(project_dir, dir+"_ts2famix.json")
+        if os.path.exists(model_filepath):
+            project_code_analyzer.process_json_file(model_filepath, output_dir)
+
+
+# Process bug data
+for subdir, dirs, files in os.walk(root_folder):
+    for dir in dirs:
+        project_dir = os.path.join(root_folder, dir)
+        process_bug_data.process_folders(project_dir)
+
+# if os.path.exists("results.zip"):
+#     shutil.rmtree("results.zip")
+# shutil.make_archive("results", 'zip', project_cleanup.backup_results_path)
+# if os.path.exists("G:/My Drive/Education/ETS/Master's/Courses/MGL843/Collab/results.zip"):
+#     shutil.rmtree("G:/My Drive/Education/ETS/Master's/Courses/MGL843/Collab/results.zip")
+# shutil.copy("results.zip", "G:/My Drive/Education/ETS/Master's/Courses/MGL843/Collab")
