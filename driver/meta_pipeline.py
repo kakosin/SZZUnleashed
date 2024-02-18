@@ -2,7 +2,6 @@ import importlib
 import os
 import shutil
 import sys
-sys.path.append('D:/dev/ETS/mgl843/SZZUnleashed/')
 from entree import project_crawler, project_cleanup
 from driver import pipeline, model_famix, pharo_analysis, project_code_analyzer, process_bug_data
 import time

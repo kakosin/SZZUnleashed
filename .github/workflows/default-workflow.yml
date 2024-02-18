@@ -3,8 +3,7 @@ name: Default Workflow
 on: workflow_dispatch
 
 jobs:
-  npm-job:
-    needs: python-job
+  npm-job:    
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -16,6 +15,7 @@ jobs:
       run: npm install
 
   python-job:
+    needs: npm-job
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -28,4 +28,4 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
     - name: Run Python script
-      run: python meta-pipeline.py
+      run: python driver/meta_pipeline.py
