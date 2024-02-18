@@ -1,6 +1,6 @@
 # Script de Gestion des Projets Git : generate_project_files_list.py
 
-Ce script automatise la création d'un dossier `result` contenant la liste des fichiers présents dans plusieurs projets Git. Pour chaque projet, un sous-dossier est créé dans `result`, contenant un fichier `all_project_files.txt` qui liste tous les fichiers du projet.
+[generate_project_files_list.py](./driver/generate_project_files_list.py) : Ce script automatise la création d'un dossier `result` contenant la liste des fichiers présents dans plusieurs projets Git. Pour chaque projet, un sous-dossier est créé dans `result`, contenant un fichier `all_project_files.txt` qui liste tous les fichiers du projet.
 
 ## Fonctionnement du Script
 
@@ -8,7 +8,7 @@ Ce script automatise la création d'un dossier `result` contenant la liste des f
 
 # Script d'Étiquetage des Fichiers bogues : process_bug_data.py
 
-Ce script est conçu pour analyser et étiqueter les fichiers d'un ensemble de projets en fonction de leur association avec des bugs. Il utilise les données extraites par l'outil SZZ, pour déterminer quels fichiers ont été affectés par des bugs.
+[process_bug_data.py](./driver/process_bug_data.py) : Ce script est conçu pour analyser et étiqueter les fichiers d'un ensemble de projets en fonction de leur association avec des bugs. Il utilise les données extraites par l'outil SZZ, pour déterminer quels fichiers ont été affectés par des bugs.
 
 ## Fonctionnement du Script
 
@@ -22,7 +22,7 @@ Ce script est conçu pour analyser et étiqueter les fichiers d'un ensemble de p
 
 # Script d'Analyse le Code des Projets : project_code_analyzer.py
 
-Ce script est conçu pour traiter les données extraites à partir du modèle, en identifiant les classes et en les associant à leurs fichiers respectifs. Ce processus aboutit à la création d'un fichier CSV `output.csv`  pour chaque projet.
+[project_code_analyzer.py](./driver/project_code_analyzer.py) : Ce script est conçu pour traiter les données extraites à partir du modèle, en identifiant les classes et en les associant à leurs fichiers respectifs. Ce processus aboutit à la création d'un fichier CSV `output.csv`  pour chaque projet.
 
 ## Fonctionnement du Script
 
@@ -34,7 +34,7 @@ Ce script est conçu pour traiter les données extraites à partir du modèle, e
 
 # Script : project_metrics_analyzer.py
 
-Ce script a pour but d'associer les informations relatives aux bugs, aux classes et méthodes, et aux métriques de code (comme LOC et CC) pour chaque fichier de projet. Il produit un fichier CSV global contenant ces données.
+[project_metrics_analyzer.py](./driver/project_metrics_analyzer.py) : Ce script a pour but d'associer les informations relatives aux bugs, aux classes et méthodes, et aux métriques de code (comme LOC et CC) pour chaque fichier de projet. Il produit un fichier CSV global contenant ces données.
 
 ## Fonctionnement du Script
 
@@ -44,7 +44,7 @@ Ce script a pour but d'associer les informations relatives aux bugs, aux classes
 
 # project_metrics_correlation_analysis.py
 
-Ce script effectue une analyse de corrélation pour déterminer la relation entre les métriques de code (comme LOC et CC) et la présence de bugs (indicateur de bug).
+[project_metrics_correlation_analysis.py](./driver/project_metrics_correlation_analysis.py) : Ce script effectue une analyse de corrélation pour déterminer la relation entre les métriques de code (comme LOC et CC) et la présence de bugs (indicateur de bug).
 
 ## Fonctionnement du Script
 
