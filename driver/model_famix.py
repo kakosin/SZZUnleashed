@@ -1,12 +1,10 @@
 import os
 import subprocess
 
-local_root = r"D:/dev/ETS/mgl843/SZZUnleashed"
-backup_results_path = os.path.join(local_root, "sortie/backup_results/")
-git_folder_path = os.path.join(local_root, "sortie/git/")
+git_folder_path = "sortie/git/"
 BLACKLIST = ['redis__ioredis']
 
-def produce_model():
+def produce_model(backup_results_path):
     model_filepaths = []
     for root, dirs, files in os.walk(backup_results_path):
         for dir in dirs:
@@ -19,6 +17,7 @@ def produce_model():
             try:
                 if not os.path.exists(git_project_path) or len(os.listdir(git_project_path)) == 0:
                     try:
+                        print(f"Cloning repo {url_git}")
                         result = subprocess.run(
                             ["git", "clone", url_git, git_project_path], timeout=300)
                         if result.returncode != 0:

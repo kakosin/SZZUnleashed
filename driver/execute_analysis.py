@@ -3,11 +3,13 @@ import sys
 sys.path.append('.')
 from driver import model_famix, pharo_analysis, project_code_analyzer, process_bug_data
 
+root_folder = "sortie/backup_results/"
+
 def run():
     if not os.path.exists("artifacts/"):
         os.mkdir("artifacts")
     print("Producing ts2famix models...")
-    model_filepaths = model_famix.produce_model()
+    model_filepaths = model_famix.produce_model(root_folder)
 
     # Pharo analysis
     print("Loading model in Pharo")
@@ -27,8 +29,6 @@ def run():
 
     # Analyze SZZ JSON files
     print("Analysing SZZ JSON files")
-    root_folder = "sortie/backup_results/"
-    filenames = ['annotations.json','fix_and_introducers_pairs.json','commits.json']
     output_dir = "artifacts/analysis/"
     for subdir, dirs, files in os.walk(root_folder):
         for dir in dirs:
