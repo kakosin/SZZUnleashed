@@ -4,14 +4,16 @@ sys.path.append('.')
 from driver import model_famix, pharo_analysis, project_code_analyzer, process_bug_data
 
 def run():
+    if not os.path.exists("artifacts/"):
+        os.mkdir("artifacts")
     print("Producing ts2famix models...")
     model_filepaths = model_famix.produce_model()
 
     # Pharo analysis
     print("Loading model in Pharo")
     # root_folder = "sortie/backup_results/"
-    # if not os.path.exists("metrics/"):
-    #     os.mkdir("metrics")
+    # if not os.path.exists("artifacts/metrics/"):
+    #     os.mkdir("artifacts/metrics/")
     # for subdir, dirs, files in os.walk(root_folder):
     #     for dir in dirs:
     #         project_dir = os.path.join(root_folder, dir)
@@ -27,7 +29,7 @@ def run():
     print("Analysing SZZ JSON files")
     root_folder = "sortie/backup_results/"
     filenames = ['annotations.json','fix_and_introducers_pairs.json','commits.json']
-    output_dir = "analysis/"
+    output_dir = "artifacts/analysis/"
     for subdir, dirs, files in os.walk(root_folder):
         for dir in dirs:
             project_dir = os.path.join(root_folder, dir)
@@ -38,7 +40,7 @@ def run():
 
     # Process bug data
     print("Processing bug data")
-    bug_dir = "bug_reports/"
+    bug_dir = "artifacts/bug_reports/"
     for subdir, dirs, files in os.walk(root_folder):
         for dir in dirs:
             project_dir = os.path.join(root_folder, dir)
@@ -51,3 +53,5 @@ def run():
     # if os.path.exists("G:/My Drive/Education/ETS/Master's/Courses/MGL843/Collab/results.zip"):
     #     shutil.rmtree("G:/My Drive/Education/ETS/Master's/Courses/MGL843/Collab/results.zip")
     # shutil.copy("results.zip", "G:/My Drive/Education/ETS/Master's/Courses/MGL843/Collab")
+
+run()

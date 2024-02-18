@@ -34,3 +34,5 @@ def setup_data():
         ACTUAL_RESULTS_COUNT = len(next(os.walk(project_cleanup.backup_results_path))[1])
         page+=1
         print(f"Found {ACTUAL_RESULTS_COUNT} coherent results...")
+
+setup_data()
