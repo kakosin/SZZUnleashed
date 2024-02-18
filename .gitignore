@@ -29,7 +29,12 @@ szz/gradle.properties
 .gradle
 
 model/data
-sortie
+sortie/*
+!sortie/backup_results/
+sortie/backup_results/*
+!sortie/backup_results/antvis__G2/
+!sortie/backup_results/antvis__G6/
+!sortie/backup_results/chartist-js__chartist/
 analysis
 bug_reports
 metrics
@@ -37,6 +42,6 @@ metrics
 # Ignore local env files
 .venv
 std*
-*.env
+token.env
 
 node_modules
