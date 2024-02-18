@@ -2,6 +2,7 @@ import importlib
 import os
 import shutil
 import sys
+sys.path.append('.')
 from entree import project_crawler, project_cleanup
 from driver import pipeline, model_famix, pharo_analysis, project_code_analyzer, process_bug_data
 import time
@@ -45,8 +46,7 @@ model_filepaths = model_famix.produce_model()
 # Pharo analysis
 print("Loading model in Pharo")
 if local_run == '1':
-    local_root = r"D:/dev/ETS/mgl843/SZZUnleashed"
-    root_folder = os.path.join(local_root, "sortie/backup_results/")
+    root_folder = "sortie/backup_results/"
     if not os.path.exists("metrics/"):
         os.mkdir("metrics")
     for subdir, dirs, files in os.walk(root_folder):
@@ -62,10 +62,9 @@ if local_run == '1':
 
 # Analyze SZZ JSON files
 print("Analysing SZZ JSON files")
-local_root = r"D:/dev/ETS/mgl843/SZZUnleashed"
-root_folder = os.path.join(local_root, "sortie/backup_results/")
+root_folder = "sortie/backup_results/"
 filenames = ['annotations.json','fix_and_introducers_pairs.json','commits.json']
-output_dir = os.path.join(local_root, "analysis/")
+output_dir = "analysis/"
 for subdir, dirs, files in os.walk(root_folder):
     for dir in dirs:
         project_dir = os.path.join(root_folder, dir)
@@ -76,7 +75,7 @@ for subdir, dirs, files in os.walk(root_folder):
 
 # Process bug data
 print("Processing bug data")
-bug_dir = os.path.join(local_root, "bug_reports/")
+bug_dir = "bug_reports/"
 for subdir, dirs, files in os.walk(root_folder):
     for dir in dirs:
         project_dir = os.path.join(root_folder, dir)
