@@ -3,7 +3,7 @@ name: Default Workflow
 on: workflow_dispatch
 
 jobs:
-  npm-job:    
+  python-job:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -13,12 +13,6 @@ jobs:
         node-version: '10'
     - name: Install NPM dependencies
       run: npm install
-
-  python-job:
-    needs: npm-job
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
