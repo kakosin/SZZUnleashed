@@ -2,62 +2,56 @@ import os
 import json
 import csv
 
-def process_bug_pairs(commits_file_path, bug_pairs_file_path):
-    with open(bug_pairs_file_path, 'r', encoding='utf-8') as f:
-        bug_pairs = json.load(f)
+def charger_json(nom_fichier):
+    with open(nom_fichier, 'r', encoding='utf-8') as fichier:
+        return json.load(fichier)
 
-    with open(commits_file_path, 'r', encoding='utf-8') as f:
-        commits = json.load(f)
+def charger_tous_les_fichiers(nom_fichier):
+    with open(nom_fichier, 'r', encoding='utf-8') as fichier:
+        return set(fichier.read().splitlines())
 
-    bug_introducing_commits = {pair[0] for pair in bug_pairs}
+def identifier_paires_uniques(donnees_paires):
+    return {tuple(paire) for paire in donnees_paires}
 
-    bug_files = {}
-    non_bug_files = {}
+def identifier_fichiers_bugges(donnees_commits, paires_uniques):
+    fichiers_bugges = set()
+    for commit, details in donnees_commits.items():
+        if commit in {paire[1] for paire in paires_uniques}:
+            fichiers_bugges.update(details['changes'])
+    return fichiers_bugges
 
-    for commit_id, commit_data in commits.items():
-        for file_path in commit_data['changes']:
-            file_name = os.path.basename(file_path)  
-            if commit_id in bug_introducing_commits:
-                bug_files[file_name] = 1
-            else:
-                non_bug_files[file_name] = 0
+def sauvegarder_indicateurs_de_bugs(fichiers_bugges, fichiers_non_bugges, chemin_csv):
+    with open(chemin_csv, 'w', newline='', encoding='utf-8') as csvfile:
+        champs = ['file_name', 'bug_indicator']
+        ecrivain = csv.DictWriter(csvfile, fieldnames=champs, delimiter=';') 
+        ecrivain.writeheader()
+        for fichier in sorted(fichiers_bugges):
+            ecrivain.writerow({'file_name': fichier, 'bug_indicator': 1})
+        for fichier in sorted(fichiers_non_bugges):
+            ecrivain.writerow({'file_name': fichier, 'bug_indicator': 0})
 
-    all_files = {**bug_files, **non_bug_files}
+def traiter_projet(chemin_projet):
+    donnees_commits = charger_json(os.path.join(chemin_projet, 'commits.json'))
+    donnees_paires = charger_json(os.path.join(chemin_projet, 'fix_and_introducers_pairs.json'))
+    tous_les_fichiers = charger_tous_les_fichiers(os.path.join(chemin_projet, 'all_project_files.txt'))
+    
+    paires_uniques = identifier_paires_uniques(donnees_paires)
+    fichiers_bugges = identifier_fichiers_bugges(donnees_commits, paires_uniques)
+    fichiers_non_bugges = tous_les_fichiers - fichiers_bugges
+    
+    nom_projet = os.path.basename(chemin_projet)
+    dossier_rapports = os.path.join('bug_reports', nom_projet)
+    os.makedirs(dossier_rapports, exist_ok=True)
+    
+    chemin_csv = os.path.join(dossier_rapports, 'file_bug_indicators.csv')
+    sauvegarder_indicateurs_de_bugs(fichiers_bugges, fichiers_non_bugges, chemin_csv)
 
-    return all_files
+def main(dossier_racine):
+    for nom_projet in os.listdir(dossier_racine):
+        chemin_projet = os.path.join(dossier_racine, nom_projet)
+        if os.path.isdir(chemin_projet):
+            traiter_projet(chemin_projet)
 
-def save_to_csv(file_data, csv_file_path):
-    with open(csv_file_path, 'w', newline='') as csvfile:
-        writer = csv.writer(csvfile)
-        writer.writerow(['file_name', 'bug_indicator'])  
-        for file_name, bug_indicator in file_data.items():
-            writer.writerow([file_name, bug_indicator])
-
-def process_folders(root_folder, bug_reports_dir):
-    if not os.path.exists(bug_reports_dir):
-        os.makedirs(bug_reports_dir)
-        
-    for subdir, dirs, files in os.walk(root_folder):
-        commits_file_path = None
-        bug_pairs_file_path = None
-
-        for file in files:
-            if file == 'commits.json':
-                commits_file_path = os.path.join(subdir, file)
-            elif file == 'fix_and_introducers_pairs.json':
-                bug_pairs_file_path = os.path.join(subdir, file)
-
-        if commits_file_path and bug_pairs_file_path:
-            all_files = process_bug_pairs(commits_file_path, bug_pairs_file_path)
-            
-            project_name = os.path.basename(subdir)
-            
-            project_dir = os.path.join(bug_reports_dir, project_name)
-            if not os.path.exists(project_dir):
-                os.makedirs(project_dir)
-            
-            csv_file_path = os.path.join(project_dir, 'file_bug_indicators.csv')
-            save_to_csv(all_files, csv_file_path)
-
-# root_folder = 'modeled_results'
-# process_folders(root_folder)
+if __name__ == "__main__":
+    dossier_racine = 'modeled_results'
+    main(dossier_racine)

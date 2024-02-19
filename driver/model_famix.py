@@ -1,10 +1,9 @@
 import os
 import subprocess
 
-git_folder_path = "sortie/git/"
 BLACKLIST = ['redis__ioredis']
 
-def produce_model(backup_results_path):
+def produce_model(backup_results_path, git_folder_path):
     model_filepaths = []
     for root, dirs, files in os.walk(backup_results_path):
         for dir in dirs:

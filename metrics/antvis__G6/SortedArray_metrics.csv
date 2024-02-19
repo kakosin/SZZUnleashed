@@ -1,0 +1,8 @@
+"Name","ClassOrMethod","LOC","CC"
+"SortedArray","C","66","-"
+"_innerAdd","M","16","4"
+"add","M","18","3"
+"remove","M","3","2"
+"_clearAndGetMinId","M","7","3"
+"_findFirstId","M","5","3"
+"minId","M","6","2"

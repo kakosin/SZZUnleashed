@@ -1,0 +1,5 @@
+"Name","ClassOrMethod","LOC","CC"
+"QuadTree","C","77","-"
+"insert","M","21","8"
+"subdivide","M","23","1"
+"queryRange","M","17","7"

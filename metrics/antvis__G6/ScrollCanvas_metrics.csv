@@ -1,0 +1,7 @@
+"Name","ClassOrMethod","LOC","CC"
+"ScrollCanvas","C","244","-"
+"onWheel","M","49","11"
+"formatDisplacement","M","71","19"
+"allowDrag","M","12","11"
+"hideShapes","M","47","7"
+"showShapes","M","36","6"

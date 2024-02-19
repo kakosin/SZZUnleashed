@@ -1,0 +1,7 @@
+"Name","ClassOrMethod","LOC","CC"
+"MarkNode","C","52","-"
+"changeData","M","5","2"
+"getMark","M","8","2"
+"getScale","M","4","2"
+"getScaleByChannel","M","4","2"
+"getGroup","M","6","2"
