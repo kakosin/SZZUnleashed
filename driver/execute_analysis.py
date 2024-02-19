@@ -1,14 +1,12 @@
 import os
 import sys
 sys.path.append('.')
-sys.path.append("D:\dev\ETS\mgl843\SZZUnleashed")
 from driver import model_famix, pharo_analysis, project_code_analyzer, process_bug_data, generate_project_files_list, project_metrics_analyzer, project_metrics_correlation_analysis
 
-root_folder = "sortie/backup_results/"
-git_folder_path = "sortie/git/"
-artifacts_folder = "artifacts/"
-
 def run():
+    root_folder = "sortie/backup_results/"
+    git_folder_path = "sortie/git/"
+    artifacts_folder = "artifacts/"
     if not os.path.exists(artifacts_folder):
         os.mkdir(artifacts_folder)
     print("Producing ts2famix models...")
@@ -72,5 +70,3 @@ def run():
     # if os.path.exists("G:/My Drive/Education/ETS/Master's/Courses/MGL843/Collab/results.zip"):
     #     shutil.rmtree("G:/My Drive/Education/ETS/Master's/Courses/MGL843/Collab/results.zip")
     # shutil.copy("results.zip", "G:/My Drive/Education/ETS/Master's/Courses/MGL843/Collab")
-
-run()

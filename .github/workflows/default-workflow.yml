@@ -22,9 +22,9 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
     - name: Run Python script
-      run: python driver/execute_analysis.py
+      run: python driver/meta_pipeline.py
     - name: Archive Python artifacts
       uses: actions/upload-artifact@v4
       with:
         name: python-artifacts
-        path: artifacts/
+        path: sortie/backup_results/
