@@ -1,0 +1,7 @@
+"Name","ClassOrMethod","LOC","CC"
+"OffscreenCanvasContext","C","30","-"
+"fillRect","M","0","1"
+"fillText","M","0","1"
+"getImageData","M","5","1"
+"measureText","M","10","1"
+"font","M","5","1"

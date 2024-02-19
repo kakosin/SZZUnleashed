@@ -1,0 +1,6 @@
+"Name","ClassOrMethod","LOC","CC"
+"ImageNode","C","168","-"
+"drawKeyShape","M","37","3"
+"calculateAnchorPosition","M","11","1"
+"draw","M","58","10"
+"drawHaloShape","M","37","3"

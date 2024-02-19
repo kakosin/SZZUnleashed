@@ -1,7 +1,7 @@
 import subprocess
 import os
 
-def creer_dossier_cible(dossier_base, nom_dossier_cible='result'):
+def creer_dossier_cible(dossier_base, nom_dossier_cible):
     chemin_dossier_cible = os.path.join(os.path.dirname(dossier_base), nom_dossier_cible)
     os.makedirs(chemin_dossier_cible, exist_ok=True)
     return chemin_dossier_cible
@@ -25,19 +25,18 @@ def ecrire_fichiers_git(dossier_cible, projet, contenu):
     with open(fichier_sortie, 'w') as f:
         f.write(contenu)
 
-def main():
+def main(dossier_projets, nom_dossier_cible='result'):
     # Chemin du dossier contenant les projets
-    dossier_projets = 'Project'
-    
-    dossier_cible = creer_dossier_cible(dossier_projets)
+    # dossier_cible = creer_dossier_cible(dossier_projets, nom_dossier_cible)
     
     for projet in os.listdir(dossier_projets):
         chemin_projet = os.path.join(dossier_projets, projet)
-        
+        print("Creating project list for "+projet)
         if os.path.isdir(chemin_projet):
             contenu = lister_fichiers_git(chemin_projet)
             if contenu is not None:
-                ecrire_fichiers_git(dossier_cible, projet, contenu)
+                ecrire_fichiers_git(nom_dossier_cible, projet, contenu)
 
 if __name__ == '__main__':
+    dossier_projets = "Project"
     main()

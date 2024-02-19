@@ -38,11 +38,11 @@ def enregistrer_donnees(data, nom_projet, global_data):
     for row in data:
         global_data.append(row)
 
-def main():
-    dossier_projets = 'bug_reports'  
+def main(dossier_projets):
     projets = lister_projets(dossier_projets)
     global_data = []
     for nom_projet in projets:
+        print("Producing metrics for "+nom_projet)
         merged = charger_donnees(nom_projet)
         data = traiter_donnees(merged, nom_projet)
         enregistrer_donnees(data, nom_projet, global_data)
@@ -54,4 +54,5 @@ def main():
     final_data.to_csv(f'{dossier_global}final_data.csv', index=False, sep=';')
 
 if __name__ == "__main__":
-    main()
+    dossier_projets = 'bug_reports'
+    main(dossier_projets)

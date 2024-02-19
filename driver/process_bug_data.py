@@ -7,7 +7,7 @@ def charger_json(nom_fichier):
         return json.load(fichier)
 
 def charger_tous_les_fichiers(nom_fichier):
-    with open(nom_fichier, 'r', encoding='utf-16') as fichier:
+    with open(nom_fichier, 'r', encoding='utf-8') as fichier:
         return set(fichier.read().splitlines())
 
 def identifier_paires_uniques(donnees_paires):
@@ -46,9 +46,12 @@ def traiter_projet(chemin_projet):
     chemin_csv = os.path.join(dossier_rapports, 'file_bug_indicators.csv')
     sauvegarder_indicateurs_de_bugs(fichiers_bugges, fichiers_non_bugges, chemin_csv)
 
-if __name__ == "__main__":
-    dossier_racine = 'modeled_results'
+def main(dossier_racine):
     for nom_projet in os.listdir(dossier_racine):
         chemin_projet = os.path.join(dossier_racine, nom_projet)
         if os.path.isdir(chemin_projet):
             traiter_projet(chemin_projet)
+
+if __name__ == "__main__":
+    dossier_racine = 'modeled_results'
+    main(dossier_racine)
