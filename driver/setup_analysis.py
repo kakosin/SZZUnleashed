@@ -12,6 +12,8 @@ def setup_data():
     NEEDED_RESULTS_COUNT = 1
     page = 1
     per_page = 1
+    root_folder = "sortie/backup_results/"
+    sortie_results = "sortie/results/"
     # Run this section in a Docker environment
     while ACTUAL_RESULTS_COUNT < NEEDED_RESULTS_COUNT:
         # Crawl projects to throw in pipeline
@@ -28,7 +30,7 @@ def setup_data():
         # Prepare results
         time.sleep(2.5)
         print("Cleaning up results...")
-        project_cleanup.cleanup_results()
-        ACTUAL_RESULTS_COUNT = len(next(os.walk(project_cleanup.backup_results_path))[1])
+        project_cleanup.cleanup_results(root_folder, sortie_results)
+        ACTUAL_RESULTS_COUNT = len(os.listdir(root_folder)) #len(next(os.walk(project_cleanup.backup_results_path))[1])
         page+=1
         print(f"Found {ACTUAL_RESULTS_COUNT} coherent results...")

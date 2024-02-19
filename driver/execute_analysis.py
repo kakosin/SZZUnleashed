@@ -17,16 +17,6 @@ def run():
     print("Generate project files")
     generate_project_files_list.main(git_folder_path, root_folder)
 
-    # Process bug data
-    print("Processing bug data")
-    process_bug_data.main(root_folder)
-    # bug_dir = os.path.join(artifacts_folder,"bug_reports/")
-    # for subdir, dirs, files in os.walk(root_folder):
-    #     for dir in dirs:
-    #         project_dir = os.path.join(root_folder, dir)
-    #         print("Processing bug data from : "+project_dir)
-    #         process_bug_data.main(project_dir, bug_dir)
-
     # Analyze SZZ JSON files
     print("Analysing SZZ JSON files")
     # output_dir =  os.path.join(artifacts_folder,"analysis/")
@@ -36,6 +26,16 @@ def run():
             model_filepath = os.path.join(project_dir, dir+"_ts2famix.json")
             if os.path.exists(model_filepath):
                 project_code_analyzer.traiter_fichier_json(model_filepath, dir)
+
+    # Process bug data
+    print("Processing bug data")
+    process_bug_data.main(root_folder)
+    # bug_dir = os.path.join(artifacts_folder,"bug_reports/")
+    # for subdir, dirs, files in os.walk(root_folder):
+    #     for dir in dirs:
+    #         project_dir = os.path.join(root_folder, dir)
+    #         print("Processing bug data from : "+project_dir)
+    #         process_bug_data.main(project_dir, bug_dir)
 
     # PHASE 2
     # Pharo analysis
@@ -70,3 +70,5 @@ def run():
     # if os.path.exists("G:/My Drive/Education/ETS/Master's/Courses/MGL843/Collab/results.zip"):
     #     shutil.rmtree("G:/My Drive/Education/ETS/Master's/Courses/MGL843/Collab/results.zip")
     # shutil.copy("results.zip", "G:/My Drive/Education/ETS/Master's/Courses/MGL843/Collab")
+
+run()
