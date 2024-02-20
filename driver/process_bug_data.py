@@ -3,12 +3,20 @@ import json
 import csv
 
 def charger_json(nom_fichier):
-    with open(nom_fichier, 'r', encoding='utf-8') as fichier:
-        return json.load(fichier)
+    try :
+        with open(nom_fichier, 'r', encoding='utf-8') as fichier:
+            return json.load(fichier)
+    except FileNotFoundError:
+        print("File not found")
+        return {}
 
 def charger_tous_les_fichiers(nom_fichier):
-    with open(nom_fichier, 'r', encoding='utf-8') as fichier:
-        return set(fichier.read().splitlines())
+    try:
+        with open(nom_fichier, 'r', encoding='utf-8') as fichier:
+            return set(fichier.read().splitlines())
+    except FileNotFoundError:
+        print("File not found")
+        return set()  
 
 def identifier_paires_uniques(donnees_paires):
     return {tuple(paire) for paire in donnees_paires}

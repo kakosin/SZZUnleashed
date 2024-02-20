@@ -4,14 +4,17 @@ import csv
 import re
 
 def charger_et_filtrer_donnees_json(chemin_fichier_json):
-    with open(chemin_fichier_json, 'r', encoding='utf-8') as fichier_json:
-        donnees = json.load(fichier_json)
+    try:
+        with open(chemin_fichier_json, 'r', encoding='utf-8') as fichier_json:
+            donnees = json.load(fichier_json)
+    except FileNotFoundError:
+        print(f"Le fichier {chemin_fichier_json} n'a pas été trouvé.")
+        return []  
     
     donnees_filtrees = [
         item for item in donnees 
         if item.get('FM3') == 'FamixTypeScript.Class'
     ]
-    
     return donnees_filtrees
 
 def extraire_chemin_specifique(chemin_complet, pattern_recherche):
