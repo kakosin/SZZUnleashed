@@ -70,22 +70,24 @@ La signification est comme suit:
 | ------------------ | -------------------------------------------------------------------------------------------------------------------------- |
 | Date d'évaluation  | 19 février 2024                                                                                                            |
 | Participants       | **Coéquipiers** : Pinto, Carlos; Nasri, Jouhaina; Boutahar, Mohammed<br>**Chargé de laboratoire** : Fuhrman, Christopher   |
-| État du projet     | *Rouge, Orange, ou Vert.*                                                                                                  |
+| État du projet     | Vert                                                                                                  |
 
 ###  Évaluation par rapport aux objectifs
 
 -   [Objectif 1](#O1)
     > État d'avancement: Complet 
 
-    > Activités réalisées: La configuration de l'environnement, la sélection des projets GitHub, et l'implémentation de l'algorithme SZZ pour identifier les fichiers bogués.
+    > Activités réalisées: La configuration de l'environnement, le forâge des projets GitHub, et l'implémentation de l'algorithme SZZ pour identifier les fichiers bogués.
 
     > Résultats obtenus: Nous avons réussi à identifier plusieurs fichiers potentiellement bogués à travers les différents projets GitHub analysés.
+    
+    > Commentaires: Déterminer les classes et méthodes à l'aide de l'analyse des lignes de code, fournits par SZZ, qui ont introduit les bogues pour une meilleure corrélation.
 
 
 -   [Objectif 2](#O3)
     > État d'avancement: Complet 
 
-    > Activités réalisées: L'intégration de Pharo au cœur de notre pipeline d'analys, l'automatisation de l'utilisation des modèles et de l'exécution du code Pharo directement dans la pipeline.
+    > Activités réalisées: L'intégration de Pharo au cœur de notre pipeline d'analyse, l'automatisation de l'utilisation des modèles et de l'exécution du code Pharo directement dans la pipeline.
 
     > Résultats obtenus: L'utilisation de Pharo dans notre pipeline a amélioré notre capacité à analyser.
 
@@ -95,14 +97,24 @@ La signification est comme suit:
     > Activités réalisées: L'utilisation de Pharo a permis d'automatiser l'extraction des métriques : le nombre de Lignes de Code (LOC) pour les classes et les méthodes, et la Complexité Cyclomatique (CC) pour les méthodes sous forme de fichiers csv.
 
     > Résultats obtenus : Grâce à cette méthodologie, nous avons réussi à identifier et à extraire efficacement les métriques associées tant aux fichiers bogués qu'aux fichiers non-bogués des divers projets GitHub analysés. 
+    
+    > Commentaires: Extraire d'autres caractéristiques du projet pour les étudier contre la corrélation des métriques et déterminer si elles ont un impact sur la corrélation.
 
 -   [Objectif 4](#O4)
     > État d'avancement: En cours
 
     > Activités réalisées: nous avons employé un code Python conçu pour relier les fichiers de métriques générés par Pharo et calculer la corrélation entre ces métriques et la présence de bogues dans les fichiers.
 
-    > Résultats obtenus: Les résultats de l'analyse de corrélation ont révélé une faible valeur de corrélation entre les métriques de LOC et de CC et la présence de bogues dans les fichiers. 
+    > Résultats obtenus: Les résultats de l'analyse de corrélation ont révélé une faible valeur de corrélation entre les métriques de LOC et de CC et la présence de bogues dans les fichiers.
+    
+    > Commentaires: Séparer la corrélation par LOC et par CC. De plus, avec les caractéristiques de l'objectif 3, il
 
+-   [Objectif 5](#O4)
+    > État d'avancement: Complet
+
+    > Activités réalisées: nous avons présenté le projet et fait une démontration de la pipeline.
+
+    > Résultats obtenus: LA démonstration a été appréciée et les explications ont été comprises par l'audience.
 
 ### Éléments de travail: prévus vs réalisés
 
@@ -110,11 +122,11 @@ La signification est comme suit:
 
 ### Évaluation par rapport aux résultats selon les critères d'évaluation 
 
-- Nous avons identifié un taux d'AUC inférieur aux attentes pour nos analyses de corrélation, ce qui était en deçà de notre objectif de performance prédéterminé. Cette situation a suscité une réévaluation approfondie de nos méthodes d'analyse et de nos jeux de données.
+- Nous avons identifié un taux d'AUC inférieur aux attentes pour nos analyses de corrélation, ce qui était en deçà de notre objectif de performance prédéterminé. Cette situation nous demande une réévaluation approfondie de nos méthodes d'analyse et de nos jeux de données.
 
 ## Autres préoccupations et écarts
 
-*Aucune por l'instant*
+*Aucune pour l'instant*
 
 ---
 

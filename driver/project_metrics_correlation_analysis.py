@@ -4,6 +4,8 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import roc_auc_score, roc_curve
 import matplotlib.pyplot as plt
 
+# TODO do graph for each metriques
+# TODO with other metadata from the projects
 def run():
     data = pd.read_csv("project_processing_results/final_data.csv", delimiter=";")
 

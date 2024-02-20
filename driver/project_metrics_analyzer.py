@@ -22,6 +22,7 @@ def traiter_donnees(merged, nom_projet):
     for _, row in merged.iterrows():
         file_name = row['file_name']
         class_name = row['nameClass']
+        # TODO compare with line of code from SZZ
         bug_indicator = row['bug_indicator']
         metrics_file_path = f'metrics/{nom_projet}/{class_name}_metrics.csv'
         try:
