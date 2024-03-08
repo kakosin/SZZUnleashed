@@ -9,8 +9,23 @@ def lister_projets(dossier):
 def charger_donnees(nom_projet):
     chemin_bug_indicators = f'bug_reports/{nom_projet}/file_bug_indicators.csv'
     chemin_output = f'processed_projects/{nom_projet}/output.csv'
-    file_bug_indicators = pd.read_csv(chemin_bug_indicators, delimiter=';')
-    output = pd.read_csv(chemin_output, delimiter=';')
+    file_bug_indicators = pd.DataFrame()
+    output = pd.DataFrame()
+
+    try : 
+        file_bug_indicators = pd.read_csv(chemin_bug_indicators, delimiter=';')
+    except FileNotFoundError:
+        print("file {chemin_bug_indicators} not found")
+
+    try : 
+        output = pd.read_csv(chemin_output, delimiter=';')
+    except FileNotFoundError:
+        print("file {chemin_output} not found")
+    
+    if file_bug_indicators.empty or output.empty:
+        print(f"Cannot merge data for {nom_projet} due to missing data.")
+        return pd.DataFrame() 
+
     merged = pd.merge(output, file_bug_indicators, on='file_name')
     return merged
 
