@@ -13,7 +13,7 @@ def setup_data():
     NEEDED_RESULTS_COUNT = 1
     page = 1
     per_page = 1
-    root_folder = "sortie/backup_results/"
+    root_folder = "."
     sortie_results = "sortie/results/"
     # Run this section in a Docker environment
     while ACTUAL_RESULTS_COUNT < NEEDED_RESULTS_COUNT:
@@ -25,15 +25,17 @@ def setup_data():
 
         # Run pipeline for batch of projects
         print("Running bug analysis + Pharo pipeline...")
-        pipeline.run_pipeline()
+        pipeline.run_szz_pipeline()
         print("done running bug analysis + Pharo pipeline...")
 
         # Prepare results
-        # time.sleep(2.5)
-        # print("Cleaning up results...")
+        time.sleep(2.5)
+        print("Cleaning up results...")
         # project_cleanup.cleanup_results(root_folder, sortie_results)
-        # ACTUAL_RESULTS_COUNT = len(os.listdir(root_folder)) #len(next(os.walk(project_cleanup.backup_results_path))[1])
-        # page+=1
-        # print(f"Found {ACTUAL_RESULTS_COUNT} coherent results...")
+        ACTUAL_RESULTS_COUNT = len(os.listdir(root_folder)) 
+        print(os.listdir(root_folder))
+        #len(next(os.walk(project_cleanup.backup_results_path))[1])
+        page+=1
+        print(f"Found {ACTUAL_RESULTS_COUNT} coherent results...")
 
 setup_data()
