@@ -5,6 +5,7 @@ import sys
 import time
 sys.path.append('.')
 from entree import project_crawler, project_cleanup
+import pipeline
 
 def setup_data():
     BLACKLIST = ["apollo-client","lobe-chat", "kibana", "vee-validate","misskey", "keystone"]
@@ -22,10 +23,10 @@ def setup_data():
         project_crawler.write_to_csv(repositories, BLACKLIST)
         print("Added repositories!")
 
-    # #     # Run pipeline for batch of projects
-    # #     # print("Running bug analysis + Pharo pipeline...")
-    # #     # pipeline.run_pipeline()
-    # #     # print("done running bug analysis + Pharo pipeline...")
+        # Run pipeline for batch of projects
+        print("Running bug analysis + Pharo pipeline...")
+        pipeline.run_pipeline()
+        print("done running bug analysis + Pharo pipeline...")
 
         # Prepare results
         time.sleep(2.5)
