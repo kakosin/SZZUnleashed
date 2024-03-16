@@ -30,30 +30,30 @@ def run():
     # Process bug data
     print("Processing bug data")
     process_bug_data.main(root_folder)
-    # bug_dir = os.path.join(artifacts_folder,"bug_reports/")
-    # for subdir, dirs, files in os.walk(root_folder):
-    #     for dir in dirs:
-    #         project_dir = os.path.join(root_folder, dir)
-    #         print("Processing bug data from : "+project_dir)
-    #         process_bug_data.main(project_dir, bug_dir)
+    bug_dir = os.path.join(artifacts_folder,"bug_reports/")
+    for subdir, dirs, files in os.walk(root_folder):
+        for dir in dirs:
+            project_dir = os.path.join(root_folder, dir)
+            print("Processing bug data from : "+project_dir)
+            process_bug_data.main(project_dir, bug_dir)
 
     # PHASE 2
     # Pharo analysis
     # This is needed
     print("Loading model in Pharo")
-    # root_folder = "sortie/backup_results/"
-    # if not os.path.exists("artifacts/metrics/"):
-    #     os.mkdir("artifacts/metrics/")
-    # for subdir, dirs, files in os.walk(root_folder):
-    #     for dir in dirs:
-    #         project_dir = os.path.join(root_folder, dir)
-    #         model_filepath = os.path.join(project_dir, dir+"_ts2famix.json")
-    #         if os.path.exists(model_filepath):
-    #             metrics_folder = f"metrics/{dir}/"
-    #             if not os.path.exists(metrics_folder):
-    #                 os.mkdir(metrics_folder)
-    #             print("Producing pharo analysis for: "+model_filepath)
-    #             pharo_analysis.analyse_model(model_filepath, metrics_folder)
+    root_folder = "sortie/backup_results/"
+    if not os.path.exists("artifacts/metrics/"):
+        os.mkdir("artifacts/metrics/")
+    for subdir, dirs, files in os.walk(root_folder):
+        for dir in dirs:
+            project_dir = os.path.join(root_folder, dir)
+            model_filepath = os.path.join(project_dir, dir+"_ts2famix.json")
+            if os.path.exists(model_filepath):
+                metrics_folder = f"metrics/{dir}/"
+                if not os.path.exists(metrics_folder):
+                    os.mkdir(metrics_folder)
+                print("Producing pharo analysis for: "+model_filepath)
+                pharo_analysis.analyse_model(model_filepath, metrics_folder)
 
     # Produce metrics
     print("Produce metrics files")

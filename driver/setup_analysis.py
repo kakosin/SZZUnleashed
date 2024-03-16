@@ -29,9 +29,11 @@ def setup_data():
         print("done running bug analysis + Pharo pipeline...")
 
         # Prepare results
-        time.sleep(2.5)
-        print("Cleaning up results...")
-        project_cleanup.cleanup_results(root_folder, sortie_results)
-        ACTUAL_RESULTS_COUNT = len(os.listdir(root_folder)) #len(next(os.walk(project_cleanup.backup_results_path))[1])
-        page+=1
-        print(f"Found {ACTUAL_RESULTS_COUNT} coherent results...")
+        # time.sleep(2.5)
+        # print("Cleaning up results...")
+        # project_cleanup.cleanup_results(root_folder, sortie_results)
+        # ACTUAL_RESULTS_COUNT = len(os.listdir(root_folder)) #len(next(os.walk(project_cleanup.backup_results_path))[1])
+        # page+=1
+        # print(f"Found {ACTUAL_RESULTS_COUNT} coherent results...")
+
+setup_data()
