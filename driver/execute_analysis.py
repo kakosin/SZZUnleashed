@@ -4,11 +4,8 @@ sys.path.append('.')
 from driver import model_famix, pharo_analysis, project_code_analyzer, process_bug_data, generate_project_files_list, project_metrics_analyzer, project_metrics_correlation_analysis
 
 def run():
-    root_folder = "sortie/backup_results/"
+    root_folder = "sortie/results/"
     git_folder_path = "sortie/git/"
-    artifacts_folder = "artifacts/"
-    if not os.path.exists(artifacts_folder):
-        os.mkdir(artifacts_folder)
     print("Producing ts2famix models...")
     model_famix.produce_model(root_folder, git_folder_path)
 
@@ -19,7 +16,6 @@ def run():
 
     # Analyze SZZ JSON files
     print("Analysing SZZ JSON files")
-    # output_dir =  os.path.join(artifacts_folder,"analysis/")
     for subdir, dirs, files in os.walk(root_folder):
         for dir in dirs:
             project_dir = os.path.join(root_folder, dir)
@@ -30,20 +26,10 @@ def run():
     # Process bug data
     print("Processing bug data")
     process_bug_data.main(root_folder)
-    bug_dir = os.path.join(artifacts_folder,"bug_reports/")
-    for subdir, dirs, files in os.walk(root_folder):
-        for dir in dirs:
-            project_dir = os.path.join(root_folder, dir)
-            print("Processing bug data from : "+project_dir)
-            process_bug_data.main(project_dir, bug_dir)
 
     # PHASE 2
     # Pharo analysis
-    # This is needed
     print("Loading model in Pharo")
-    root_folder = "sortie/backup_results/"
-    if not os.path.exists("artifacts/metrics/"):
-        os.mkdir("artifacts/metrics/")
     for subdir, dirs, files in os.walk(root_folder):
         for dir in dirs:
             project_dir = os.path.join(root_folder, dir)
@@ -63,6 +49,8 @@ def run():
     # Produce correlation
     print("Produce correlation")
     project_metrics_correlation_analysis.run()
+
+    print(os.listdir(root_folder))
 
     # if os.path.exists("results.zip"):
     #     shutil.rmtree("results.zip")

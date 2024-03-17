@@ -6,15 +6,17 @@ import time
 sys.path.append('.')
 from entree import project_crawler, project_cleanup
 import pipeline
+from dotenv import load_dotenv
+load_dotenv('token.env')
 
 def setup_data():
-    BLACKLIST = ["apollo-client","lobe-chat", "kibana", "vee-validate","misskey", "keystone"]
+    BLACKLIST = ["apollo-client","lobe-chat", "kibana", "vee-validate","misskey", "keystone", "BuilderIO"]
     ACTUAL_RESULTS_COUNT = 0
-    NEEDED_RESULTS_COUNT = 1
+    NEEDED_RESULTS_COUNT = int(os.getenv('NEEDED_RESULTS'))
     page = 1
-    per_page = 1
-    root_folder = "."
-    sortie_results = "sortie/results/"
+    per_page = int(os.getenv('RESULTS_PER_PAGE'))
+    root_folder = "sortie/results"
+
     # Run this section in a Docker environment
     while ACTUAL_RESULTS_COUNT < NEEDED_RESULTS_COUNT:
         # Crawl projects to throw in pipeline
@@ -29,8 +31,8 @@ def setup_data():
         print("done running bug analysis + Pharo pipeline...")
 
         # Prepare results
-        time.sleep(2.5)
-        print("Cleaning up results...")
+        time.sleep(10)
+
         # project_cleanup.cleanup_results(root_folder, sortie_results)
         ACTUAL_RESULTS_COUNT = len(os.listdir(root_folder)) 
         print(os.listdir(root_folder))

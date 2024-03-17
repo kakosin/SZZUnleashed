@@ -1,9 +1,14 @@
 import subprocess
 
-vm_path = r"C:/Users/Carlos/Documents/Pharo/vms/100-x64/Pharo.exe"
-Pharo_path = r"C:/Users/Carlos/Documents/Pharo/images/mgl843/mgl843.image"
-model_load_st = r"D:/dev/ETS/mgl843/SZZUnleashed/driver/model_load.st"
-model_analyse_st = r"D:/dev/ETS/mgl843/SZZUnleashed/driver/model_analyse.st"
+# vm_path = r"C:/Users/Carlos/Documents/Pharo/vms/100-x64/Pharo.exe"
+# Pharo_path = r"C:/Users/Carlos/Documents/Pharo/images/mgl843/mgl843.image"
+# model_load_st = r"D:/dev/ETS/mgl843/SZZUnleashed/driver/model_load.st"
+# model_analyse_st = r"D:/dev/ETS/mgl843/SZZUnleashed/driver/model_analyse.st"
+
+vm_path = r"./pharo"
+Pharo_path = r"Pharo.image"
+model_load_st = r"./driver/model_load.st"
+model_analyse_st = r"./driver/model_analyse.st"
 
 # Load Model
 def load_model(model_path):

@@ -11,6 +11,7 @@ def produce_model(backup_results_path, git_folder_path):
                 continue
             owner_name = dir.split("__")[0]
             repo_name = dir.split("__")[1]
+            print(f"Attempting to clone: {owner_name}/{repo_name}")
             url_git = f"https://github.com/{owner_name}/{repo_name}.git"
             git_project_path = os.path.join(git_folder_path, dir)
             try:
