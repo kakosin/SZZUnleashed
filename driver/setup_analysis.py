@@ -10,7 +10,7 @@ from dotenv import load_dotenv
 load_dotenv('token.env')
 
 def setup_data():
-    BLACKLIST = ["apollo-client","lobe-chat", "kibana", "vee-validate","misskey", "keystone", "BuilderIO"]
+    BLACKLIST = ["apollo-client","lobe-chat", "kibana", "vee-validate","misskey", "keystone", "BuilderIO", "wechaty", "web3.js"]
     ACTUAL_RESULTS_COUNT = 0
     NEEDED_RESULTS_COUNT = int(os.getenv('NEEDED_RESULTS'))
     page = 1
@@ -22,7 +22,8 @@ def setup_data():
         # Crawl projects to throw in pipeline
         print("Looking for repositories...")
         repositories = project_crawler.search_github_repositories(project_crawler.QUERY, page=page, per_page=per_page)
-        project_crawler.write_to_csv(repositories, BLACKLIST)
+        project_crawler.write_to_csv('./entree/Projects.csv', repositories, BLACKLIST)
+        project_crawler.write_to_csv('./entree/AllProjects.csv', repositories, BLACKLIST, 'a')
         print("Added repositories!")
 
         # Run pipeline for batch of projects
