@@ -1,5 +1,6 @@
 import os
 import subprocess
+import time
 
 BLACKLIST = ['redis__ioredis']
 
@@ -18,6 +19,7 @@ def produce_model(backup_results_path, git_folder_path):
                 if not os.path.exists(git_project_path) or len(os.listdir(git_project_path)) == 0:
                     try:
                         print(f"Cloning repo {url_git}")
+                        time.sleep(10)
                         result = subprocess.run(
                             ["git", "clone", url_git, git_project_path], timeout=300)
                         if result.returncode != 0:

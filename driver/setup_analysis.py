@@ -25,7 +25,7 @@ def setup_data():
         project_crawler.write_to_csv('./entree/Projects.csv', repositories, BLACKLIST)
         project_crawler.write_to_csv('./entree/AllProjects.csv', repositories, BLACKLIST, 'a')
         print("Added repositories!")
-
+        time.sleep(10)
         # Run pipeline for batch of projects
         print("Running bug analysis + Pharo pipeline...")
         pipeline.run_szz_pipeline()
