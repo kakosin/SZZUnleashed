@@ -20,7 +20,8 @@ import re
 # Build an image Pharo 10 from this repo: https://github.com/yacinekhtr/SZZ_results_analyser
 vm_path = r"C:/Users/Carlos/Documents/Pharo/vms/100-x64/Pharo.exe"
 Pharo_path = r"C:/Users/Carlos/Documents/Pharo/images/m10_szz/m10_szz.image"
-local_root = r"D:/dev/ETS/mgl843/SZZUnleashed"
+# local_root = r"D:/dev/ETS/mgl843/SZZUnleashed"
+local_root = "."
 command_pharo_ro = f"SZZImporter findFilesChangedByBugfixesFrom: '{local_root}/sortie/results/DOSSIER_NAME/annotations.json' to: 'YOUR_CSV_VARIABLE_HERE'"
 
 # Chemin du fichier Projects.csv
@@ -35,9 +36,9 @@ if github_token is None:
     raise SystemExit(1)
 
 # Commande Docker avec la variable local_root
-docker_command = f"docker run -e GITHUB_TOKEN={github_token} -v {local_root}/entree:/input -v {local_root}/sortie:/output szz_github"
+docker_command = f"docker run -e GITHUB_TOKEN={github_token} -v {local_root}/entree:/input -v {local_root}/sortie:/output cpintodev/szz_github"
 
-def run_pipeline():
+def run_szz_pipeline():
     print("Running docker command:")
     print(docker_command)
     print("patience...")
@@ -60,6 +61,7 @@ def run_pipeline():
     # Affichage du code de retour du processus
     print("Return code:", process.returncode)
 
+def run_pharo_szz_pipeline():
     # Lecture du fichier Projects.csv pour obtenir github_repo
     with open(projects_csv_path, newline="") as csvfile:
         for row in csv.reader(csvfile):

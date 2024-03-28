@@ -46,6 +46,7 @@ def tracer_auc_et_roc(data, features):
     plt.title('Des courbes ROC pour LOC et CC')
     plt.legend(loc="lower right")
     plt.show()
+    plt.savefig('project_processing_results/correlation.png')
 
 def run():
     try :
@@ -57,4 +58,3 @@ def run():
         print("Fichier vide")
     except pd.errors.ParserError:
         print("Erreur lors de l'analyse du fichier")
-

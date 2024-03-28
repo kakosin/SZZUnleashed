@@ -157,7 +157,7 @@ def findAllBugs(proprio, nomRepo, listLabels):
                 listIssues.append(issue)
 
             print("Lecture de la page " + str(page-1) + " de la recherche des bogues fermés du label:" + label)
-            time.sleep(2.5) # pour empêcher d'être bloqué par la limite d'utilisation du githubAPI 30 request par minutes
+            time.sleep(10) # pour empêcher d'être bloqué par la limite d'utilisation du githubAPI 30 request par minutes
 
 
     print("Il y a " + str(currentBugs) + " bogues résolus dans le projet " + proprio + "/" + nomRepo + " !!! :O")

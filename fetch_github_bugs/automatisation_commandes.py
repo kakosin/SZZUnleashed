@@ -12,6 +12,7 @@ import os
 import subprocess
 import shutil
 import sys 
+import time
 
 parent_folder = '/root/projet_tests' ## changer en '/output/git'
 
@@ -54,6 +55,7 @@ with open('/input/Projects.csv', newline="") as csvfile:
         try:
             if not os.path.exists(local_path) or len(os.listdir(local_path)) == 0:
                 try:
+                    time.sleep(10)
                     result = subprocess.run(["git", "clone", url_git], timeout=300)
                     if result.returncode != 0:
                         print("Error:", result.returncode)

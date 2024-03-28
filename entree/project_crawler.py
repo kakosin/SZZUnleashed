@@ -60,14 +60,14 @@ def search_github_repositories(query, sort="stars", order="desc", page=1, per_pa
     else:
         raise Exception(f"Failed to search repositories: {response.content}")
 
-def write_to_csv(repositories, blacklist, mode='w'):
+def write_to_csv(filename, repositories, blacklist, mode='w'):
     """
     Write repository data to a CSV file.
 
     :param repositories: List of repository data.
     :param mode: File opening mode ('w' for write, 'a' for append).
     """
-    with open('./entree/Projects.csv', mode, newline='', encoding='utf-8') as file:
+    with open(filename, mode, newline='', encoding='utf-8') as file:
         writer = csv.writer(file)
         for repo in repositories:
             owner, repo_name = repo['full_name'].split('/')
