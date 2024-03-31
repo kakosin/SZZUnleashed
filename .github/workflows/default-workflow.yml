@@ -27,6 +27,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NEEDED_RESULTS: ${{ vars.NEEDED_RESULTS }}
           RESULTS_PER_PAGE: ${{ vars.RESULTS_PER_PAGE }}
+          LIGHT_PIPELINE: ${{ vars.LIGHT_PIPELINE }}
+          PULL_GITHUB_PROJECTS:  ${{ vars.PULL_GITHUB_PROJECTS }}
       - name: Upload Python artifacts
         if: always()
         uses: actions/upload-artifact@v4

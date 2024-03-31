@@ -15,10 +15,12 @@ def setup_data():
     NEEDED_RESULTS_COUNT = int(os.getenv('NEEDED_RESULTS'))
     page = 1
     per_page = int(os.getenv('RESULTS_PER_PAGE'))
+    pull_github_projects = eval(os.getenv('PULL_GITHUB_PROJECTS'))
+    light_pipeline = eval(os.getenv('LIGHT_PIPELINE'))
     root_folder = "sortie/results"
 
     # Run this section in a Docker environment
-    while ACTUAL_RESULTS_COUNT < NEEDED_RESULTS_COUNT:
+    while pull_github_projects and (ACTUAL_RESULTS_COUNT < NEEDED_RESULTS_COUNT):
         # Crawl projects to throw in pipeline
         print("Looking for repositories...")
         repositories = project_crawler.search_github_repositories(project_crawler.QUERY, page=page, per_page=per_page)
@@ -40,5 +42,14 @@ def setup_data():
         #len(next(os.walk(project_cleanup.backup_results_path))[1])
         page+=1
         print(f"Found {ACTUAL_RESULTS_COUNT} coherent results...")
+
+    if not pull_github_projects:
+        if light_pipeline:
+            shutil.copyfile('./entree/LightProjects.csv', './entree/Projects.csv')
+        else:
+            shutil.copyfile('./entree/FilteredProjects.csv', './entree/Projects.csv')
+
+        pipeline.run_szz_pipeline()
+
 
 setup_data()

@@ -37,12 +37,14 @@ sortie/test_results/*
 !sortie/test_results/chartist-js__chartist/
 analysis
 bug_reports
-# metrics
+metrics
 artifacts/
+project_processing_results
+processed_projects
 
 # Ignore local env files
 .venv
 std*
-token.env
+
 
 node_modules
