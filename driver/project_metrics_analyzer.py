@@ -7,7 +7,7 @@ def lister_projets(dossier):
     return [nom for nom in os.listdir(dossier) if os.path.isdir(os.path.join(dossier, nom))]
 
 def charger_donnees(nom_projet):
-    chemin_bug_indicators = f'bug_reports/{nom_projet}/file_bug_indicators.csv'
+    chemin_bug_indicators = f'sortie/results/{nom_projet}/file_bug_indicators.csv'
     chemin_output = f'processed_projects/{nom_projet}/output.csv'
     file_bug_indicators = pd.DataFrame()
     output = pd.DataFrame()
@@ -50,25 +50,45 @@ def traiter_donnees(merged, nom_projet):
             pass
     return data
 
-def enregistrer_donnees(data, nom_projet, global_data):
-    for row in data:
-        global_data.append(row)
+def enregistrer_donnees(data, nom_projet, dossier_global):
+    if not data:
+        return []  # Retourne une liste vide si aucune donnée à enregistrer
+    
+    dossier_projet = os.path.join(dossier_global, nom_projet)
+    if not os.path.exists(dossier_projet):
+        os.makedirs(dossier_projet)
+    
+    final_data = pd.DataFrame(data)
+    chemin_fichier_final = os.path.join(dossier_projet, 'final_data_per_project.csv')
+    final_data.to_csv(chemin_fichier_final, index=False, sep=';')
+    print(f"Data saved to {chemin_fichier_final}")
+    
+    return data 
+
+
+def sauvegarder_donnees_globales(donnees_globales, dossier_global):
+    if not os.path.exists(dossier_global):
+        os.makedirs(dossier_global)
+    
+    chemin_fichier_global = os.path.join(dossier_global, 'final_data.csv')
+    donnees_globales_df = pd.DataFrame(donnees_globales)
+    donnees_globales_df.to_csv(chemin_fichier_global, index=False, sep=';')
+    print(f"Global data saved to {chemin_fichier_global}")
+
 
 def main(dossier_projets):
     projets = lister_projets(dossier_projets)
-    global_data = []
+    dossier_global = 'project_processing_results/'
+    donnees_globales = []
+
     for nom_projet in projets:
-        print("Producing metrics for "+nom_projet)
+        print("Producing metrics for " + nom_projet)
         merged = charger_donnees(nom_projet)
         data = traiter_donnees(merged, nom_projet)
-        enregistrer_donnees(data, nom_projet, global_data)
+        donnees_globales.extend(enregistrer_donnees(data, nom_projet, dossier_global))
     
-    dossier_global = 'project_processing_results/'
-    if not os.path.exists(dossier_global):
-        os.makedirs(dossier_global)
-    final_data = pd.DataFrame(global_data)
-    final_data.to_csv(f'{dossier_global}final_data.csv', index=False, sep=';')
+    sauvegarder_donnees_globales(donnees_globales, dossier_global)
 
 if __name__ == "__main__":
-    dossier_projets = 'bug_reports'
+    dossier_projets = 'sortie/results'
     main(dossier_projets)
