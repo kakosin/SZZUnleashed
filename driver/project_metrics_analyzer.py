@@ -67,10 +67,14 @@ def enregistrer_donnees(data, nom_projet, dossier_global):
 
 
 def sauvegarder_donnees_globales(donnees_globales, dossier_global):
+    if not os.path.exists(dossier_global):
+        os.makedirs(dossier_global)
+    
     chemin_fichier_global = os.path.join(dossier_global, 'final_data.csv')
     donnees_globales_df = pd.DataFrame(donnees_globales)
     donnees_globales_df.to_csv(chemin_fichier_global, index=False, sep=';')
     print(f"Global data saved to {chemin_fichier_global}")
+
 
 def main(dossier_projets):
     projets = lister_projets(dossier_projets)
