@@ -1,11 +1,15 @@
 import subprocess
+import os
 
 # vm_path = r"C:/Users/Carlos/Documents/Pharo/vms/100-x64/Pharo.exe"
 # Pharo_path = r"C:/Users/Carlos/Documents/Pharo/images/mgl843/mgl843.image"
 # model_load_st = r"D:/dev/ETS/mgl843/SZZUnleashed/driver/model_load.st"
 # model_analyse_st = r"D:/dev/ETS/mgl843/SZZUnleashed/driver/model_analyse.st"
 
-vm_path = r"./pharo"
+vm_path_linux = r"./pharo"  
+vm_path_windows = r".\pharo.exe" 
+
+vm_path = os.getenv(vm_path_linux, vm_path_windows)
 Pharo_path = r"Pharo.image"
 model_load_st = r"./driver/model_load.st"
 model_analyse_st = r"./driver/model_analyse.st"

@@ -1,7 +1,8 @@
 import os
 import sys
 sys.path.append('.')
-from driver import model_famix, pharo_analysis, project_code_analyzer, process_bug_data, generate_project_files_list, project_metrics_analyzer, project_metrics_correlation_analysis
+from driver import model_famix, pharo_analysis, project_code_analyzer, process_bug_data,generate_graph_srcFile_bugLines,input_pharo_lines_with_code
+from driver import project_metrics_correlation_analysis, generate_project_files_list,project_metrics_analyzer,input_pharo_lines_only
 
 def run():
     root_folder = "sortie/results/"
@@ -23,6 +24,13 @@ def run():
             if os.path.exists(model_filepath):
                 project_code_analyzer.traiter_fichier_json(model_filepath, dir)
 
+
+    print("Analysing Pharo project lines for bugs")
+    input_pharo_lines_only.main(root_folder)
+
+    print("Analysing Pharo project lines for bugs with code")
+    input_pharo_lines_with_code.main(root_folder)
+    
     # Process bug data
     print("Processing bug data")
     process_bug_data.main(root_folder)
@@ -50,6 +58,9 @@ def run():
     print("Produce correlation")
     project_metrics_correlation_analysis.run()
 
+    print("Produce graph")
+    generate_graph_srcFile_bugLines.main(root_folder)
+    
     print(os.listdir(root_folder))
 
     # if os.path.exists("results.zip"):
