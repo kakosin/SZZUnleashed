@@ -35,6 +35,7 @@ jobs:
         with:
           name: python-artifacts
           path: |
+            sortie/git/
             sortie/results/
             entree/
   analyse-repos-pharo-python:
