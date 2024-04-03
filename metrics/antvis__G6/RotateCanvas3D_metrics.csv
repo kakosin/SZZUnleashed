@@ -1,8 +1,0 @@
-"Name","ClassOrMethod","LOC","CC"
-"RotateCanvas3D","C","120","-"
-"onPointerDown","M","8","4"
-"onPointerMove","M","20","5"
-"onPointerUp","M","2","1"
-"onKeydown","M","20","12"
-"onKeyup","M","5","3"
-"rotate","M","16","3"
