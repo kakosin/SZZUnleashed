@@ -21,7 +21,7 @@ jobs:
           pip install docker
       - name: Run Docker SZZ pipeline
         run: |
-          docker pull --all-tags docker.io/cpintodev/szz_github
+          docker pull docker.io/cpintodev/szz_github
           python -u driver/setup_analysis.py
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
