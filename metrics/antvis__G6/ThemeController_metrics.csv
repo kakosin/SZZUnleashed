@@ -1,7 +1,0 @@
-"Name","ClassOrMethod","LOC","CC"
-"ThemeController","C","66","-"
-"tap","M","5","1"
-"getPlugin","M","5","3"
-"getThemes","M","2","1"
-"onInit","M","13","5"
-"onThemeChange","M","4","2"

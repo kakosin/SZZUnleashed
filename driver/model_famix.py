@@ -6,7 +6,9 @@ BLACKLIST = ['redis__ioredis']
 
 def produce_model(backup_results_path, git_folder_path):
     model_filepaths = []
+    print(f"Looking into {backup_results_path}")
     for root, dirs, files in os.walk(backup_results_path):
+        print(f"Analysing dirs {dirs}")
         for dir in dirs:
             if dir in BLACKLIST:
                 continue
@@ -21,7 +23,7 @@ def produce_model(backup_results_path, git_folder_path):
                         print(f"Cloning repo {url_git}")
                         time.sleep(10)
                         result = subprocess.run(
-                            ["git", "clone", url_git, git_project_path], timeout=300)
+                            ["git", "clone", url_git, git_project_path], timeout=600)
                         if result.returncode != 0:
                             print("Error:", result.returncode)
                             raise SystemExit(result.returncode)
@@ -41,7 +43,7 @@ def produce_model(backup_results_path, git_folder_path):
             if os.path.exists(tsconfig_filepath):
                 try:
                     print("Beginning ts2famix...")
-                    subprocess.check_call(f"ts2famix -i {tsconfig_filepath} -o {model_filepath}", shell=True, stdout=subprocess.DEVNULL, timeout=600)
+                    subprocess.check_call(f"ts2famix -i {tsconfig_filepath} -o {model_filepath}", shell=True, stdout=subprocess.DEVNULL, timeout=300)
                     print("Ended ts2famix...")
                 except subprocess.CalledProcessError as e:
                     print(e)

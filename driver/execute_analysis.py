@@ -30,6 +30,8 @@ def run():
     # PHASE 2
     # Pharo analysis
     print("Loading model in Pharo")
+    if not os.path.exists("metrics"):
+        os.mkdir("metrics")
     for subdir, dirs, files in os.walk(root_folder):
         for dir in dirs:
             project_dir = os.path.join(root_folder, dir)

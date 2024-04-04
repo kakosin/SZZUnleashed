@@ -1,7 +1,0 @@
-"Name","ClassOrMethod","LOC","CC"
-"TriangleNode","C","204","-"
-"draw","M","58","10"
-"drawKeyShape","M","21","1"
-"getTrianglePath","M","16","4"
-"drawIconShape","M","47","8"
-"calculateAnchorPosition","M","26","4"
