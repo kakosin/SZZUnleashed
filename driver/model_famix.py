@@ -6,7 +6,9 @@ BLACKLIST = ['redis__ioredis']
 
 def produce_model(backup_results_path, git_folder_path):
     model_filepaths = []
+    print(f"Looking into {backup_results_path}")
     for root, dirs, files in os.walk(backup_results_path):
+        print(f"Analysing dirs {dirs}")
         for dir in dirs:
             if dir in BLACKLIST:
                 continue

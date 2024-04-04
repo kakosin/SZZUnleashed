@@ -83,3 +83,4 @@ jobs:
             metrics/
             processed_projects/
             project_processing_results/
+            artifacts/

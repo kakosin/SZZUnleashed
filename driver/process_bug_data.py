@@ -7,7 +7,7 @@ def charger_json(nom_fichier):
         with open(nom_fichier, 'r', encoding='utf-8') as fichier:
             return json.load(fichier)
     except FileNotFoundError:
-        print("File not found")
+        print(f"{nom_fichier} File not found")
         return {}
 
 def charger_tous_les_fichiers(nom_fichier):
@@ -15,7 +15,7 @@ def charger_tous_les_fichiers(nom_fichier):
         with open(nom_fichier, 'r', encoding='utf-8') as fichier:
             return set(fichier.read().splitlines())
     except FileNotFoundError:
-        print("File not found")
+        print(f"{nom_fichier} File not found")
         return set()  
 
 def identifier_paires_uniques(donnees_paires):
