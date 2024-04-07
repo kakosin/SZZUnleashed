@@ -56,7 +56,7 @@ with open('/input/Projects.csv', newline="") as csvfile:
             if not os.path.exists(local_path) or len(os.listdir(local_path)) == 0:
                 try:
                     time.sleep(10)
-                    result = subprocess.run(["git", "clone", url_git], timeout=300)
+                    result = subprocess.run(["git", "clone", url_git])
                     if result.returncode != 0:
                         print("Error:", result.returncode)
                         raise SystemExit(result.returncode)
@@ -89,25 +89,25 @@ with open('/input/Projects.csv', newline="") as csvfile:
         try:
             ## Analyse du projet git
             print("fetch_github.py...")                                                                     
-            result = subprocess.run(["python3", "/root/fetch_github_bugs/fetch_github.py", github_owner, github_repo], timeout=300)
+            result = subprocess.run(["python3", "/root/fetch_github_bugs/fetch_github.py", github_owner, github_repo])
             if result.returncode != 0:
                 print("Error:", result.returncode)
                 raise SystemExit(result.returncode)
             
             print("git_log_to_array.py...")                                                                    
-            result = subprocess.run(["python3", "/root/fetch_github_bugs/git_log_to_array.py", "--repo-path", github_repo, "--from-commit", Commit], timeout=300)
+            result = subprocess.run(["python3", "/root/fetch_github_bugs/git_log_to_array.py", "--repo-path", github_repo, "--from-commit", Commit])
             if result.returncode != 0:
                 print("Error:", result.returncode)
                 raise SystemExit(result.returncode)
             
             print("find_bug_fixes.py...")                    
-            result = subprocess.run(["python3", "/root/fetch_github_bugs/find_bug_fixes.py", "--gitlog", "./gitlog.json", "--issue-list", "./fetch_issues", "--gitlog-pattern", '"[Cc]loses #{nbr}\D|#{nbr}\D|[Ff]ixes #{nbr}\D"'], timeout=300)
+            result = subprocess.run(["python3", "/root/fetch_github_bugs/find_bug_fixes.py", "--gitlog", "./gitlog.json", "--issue-list", "./fetch_issues", "--gitlog-pattern", '"[Cc]loses #{nbr}\D|#{nbr}\D|[Ff]ixes #{nbr}\D"'])
             if result.returncode != 0:
                 print("Error:", result.returncode)
                 raise SystemExit(result.returncode)
             
             print("szz_find_bug_introducers-0.1.jar...")
-            result = subprocess.run(["java", "-jar", "/root/szz/build/libs/szz_find_bug_introducers-0.1.jar", "-i", "./issue_list.json", "-r", github_repo], timeout=300)
+            result = subprocess.run(["java", "-jar", "/root/szz/build/libs/szz_find_bug_introducers-0.1.jar", "-i", "./issue_list.json", "-r", github_repo])
             if result.returncode != 0:
                 print("Error:", result.returncode)
                 raise SystemExit(result.returncode)
@@ -116,17 +116,17 @@ with open('/input/Projects.csv', newline="") as csvfile:
             continue
 
         try:
-            result = subprocess.run(["cp", "./results/annotations.json", project_output], timeout=60)
+            result = subprocess.run(["cp", "./results/annotations.json", project_output])
             if result.returncode != 0:
                 print("Error copying annotations.json:", result.returncode)
                 raise SystemExit(result.returncode)
             
-            result = subprocess.run(["cp", "./results/commits.json", project_output], timeout=60)
+            result = subprocess.run(["cp", "./results/commits.json", project_output])
             if result.returncode != 0:
                 print("Error copying commits.json:", result.returncode)
                 raise SystemExit(result.returncode)
             
-            result = subprocess.run(["cp", "./results/fix_and_introducers_pairs.json", project_output], timeout=60)
+            result = subprocess.run(["cp", "./results/fix_and_introducers_pairs.json", project_output])
             if result.returncode != 0:
                 print("Error copying fix_and_introducers_pairs.json:", result.returncode)
                 raise SystemExit(result.returncode)
