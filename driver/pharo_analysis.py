@@ -1,14 +1,15 @@
 import subprocess
+import os
+from dotenv import load_dotenv
+load_dotenv('dev.env')
+PHARO_PATH = os.getenv('PHARO_PATH')
+PHARO_IMAGE = os.getenv('PHARO_IMAGE')
+PROJECT_PATH = os.getenv('PROJECT_PATH')
 
-# vm_path = r"C:/Users/Carlos/Documents/Pharo/vms/100-x64/Pharo.exe"
-# Pharo_path = r"C:/Users/Carlos/Documents/Pharo/images/mgl843/mgl843.image"
-# model_load_st = r"D:/dev/ETS/mgl843/SZZUnleashed/driver/model_load.st"
-# model_analyse_st = r"D:/dev/ETS/mgl843/SZZUnleashed/driver/model_analyse.st"
-
-vm_path = r"./pharo"
-Pharo_path = r"Pharo.image"
-model_load_st = r"./driver/model_load.st"
-model_analyse_st = r"./driver/model_analyse.st"
+vm_path = PHARO_PATH
+Pharo_path = PHARO_IMAGE
+model_load_st = os.path.join(PROJECT_PATH, "driver/model_load.st")
+model_analyse_st = os.path.join(PROJECT_PATH, "driver/model_analyse.st")
 
 # Load Model
 def load_model(model_path):
@@ -18,6 +19,6 @@ def load_model(model_path):
 def analyse_model(model_path, metrics_folder):
     command_analyse_model = fr'"{vm_path}" "{Pharo_path}" st {model_analyse_st} "{model_path}" "{metrics_folder}"'
     try:
-        subprocess.run(command_analyse_model, shell=True, timeout=10)
+        subprocess.run(command_analyse_model, shell=True)
     except subprocess.TimeoutExpired as e:
         return

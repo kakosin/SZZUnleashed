@@ -16,19 +16,21 @@ import pandas as pd
 #import matplotlib.pyplot as plt
 import re
 
-
+load_dotenv('dev.env')
+PHARO_PATH = os.getenv('PHARO_PATH')
+PHARO_IMAGE = os.getenv('PHARO_IMAGE')
+PROJECT_PATH = os.getenv('PROJECT_PATH')
 # Build an image Pharo 10 from this repo: https://github.com/yacinekhtr/SZZ_results_analyser
-vm_path = r"C:/Users/Carlos/Documents/Pharo/vms/100-x64/Pharo.exe"
-Pharo_path = r"C:/Users/Carlos/Documents/Pharo/images/m10_szz/m10_szz.image"
-# local_root = r"D:/dev/ETS/mgl843/SZZUnleashed"
-local_root = "."
+vm_path = PHARO_PATH
+Pharo_path = PHARO_IMAGE
+local_root = PROJECT_PATH
 command_pharo_ro = f"SZZImporter findFilesChangedByBugfixesFrom: '{local_root}/sortie/results/DOSSIER_NAME/annotations.json' to: 'YOUR_CSV_VARIABLE_HERE'"
 
 # Chemin du fichier Projects.csv
 projects_csv_path = rf'{local_root}\entree\Projects.csv'
 
 # Récupération du token GitHub à partir des variables d'environnement
-load_dotenv('token.env')
+load_dotenv('dev.env')
 github_token = os.environ.get("GITHUB_TOKEN")
 
 if github_token is None:
@@ -36,7 +38,7 @@ if github_token is None:
     raise SystemExit(1)
 
 # Commande Docker avec la variable local_root
-docker_command = f"docker run -e GITHUB_TOKEN={github_token} -v {local_root}/entree:/input -v {local_root}/sortie:/output cpintodev/szz_github"
+docker_command = f"docker run -e GITHUB_TOKEN={github_token} -v {local_root}/entree:/input -v {local_root}/sortie:/output cpintodev/szz_github:latest"
 
 def run_szz_pipeline():
     print("Running docker command:")

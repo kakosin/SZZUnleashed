@@ -1,3 +1,39 @@
+# Demo Run
+
+In order to setup the project, please follow these instructions below. Currently, the `LIGHT_PIPELINE` version runs a single project and takes about 20mins in a 8GB RAM and i5-1035 CPU.
+
+## Prerequisites
+- Have a Docker software installed since the SZZ runs on a container.
+- Have [`Python 3.12`](https://www.python.org/downloads/release/python-3120/) installed. The `requirements.txt` is provided.
+- Have [`NodeJS 21`](https://nodejs.org/en/download) installed. The `package.json` is provided.
+- Have [`PharoLauncher`](https://pharo.org/download) instaled.
+- In `Pharo` create a `Moose 10` image using the GUI.
+- Install [`FamixTypeScript`](https://fuhrmanator.github.io/2023/09/15/TypeScript-support-in-Moose.html) as per the Playground instructions.
+
+## Setup
+Using the `dev.env` file, setup the following variables to your local machine (if on `Windows` use `/` instead of `\` in your paths):
+- `GITHUB_TOKEN`, create your [`API`](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens) token.
+- `PHARO_PATH`, should point to your `Pharo` executable. Typically, `_userfolder_/Pharo/vms/100-x64/Pharo.exe`
+- `PHARO_IMAGE`, should point to your `Pharo` image. Typically, `_userfolder_/Pharo/images/mgl843/mgl843.image`
+- `PROJECT_PATH`, should point to where this repository is cloned including the name of the repository given locally.
+
+## Instructions to run
+Once everything is set up, you can run the `Python` scripts:
+- It is recommended you create a `venv` using `python -m venv .venv`
+- Activate it `.venv/scripts/Activate` (may very based on OS)
+- Setup the libraries `pip install -r requirements.txt`
+- Install the npm dependencies `npm install`
+- Run `python ./driver/setup_analysis.py`
+- Run `python ./driver/execute_analysis.py`
+- Depending on your machine specifications, the pipeline execution may vary. The limiting hardware is the RAM and CPU, but mostly RAM.
+- If you wish to run the longer version set `LIGHT_PIPELINE` to `False`.
+    
+## Further Reseach
+If you wish to evolve the base projects in the repository, you can enable the continuous lookup of projects. However, you will have to watch over the pipeline as some repositories may not be apt for the pipeline. To do so:
+- Enable `PULL_GITHUB_PROJECTS`
+- Change the limits of `RESULTS_PER_PAGE` and `NEEDED_RESULTS`.
+- You may change `STARTING_PAGE` to start the pulling of repositories from another page.
+
 # SZZ Unleashed
 
 SZZ Unleashed is an implementation of the SZZ algorithm, i.e. an approach to identify bug-introducing commits, introduced by Śliwerski et al's in ["When Do Changes Induce Fixes?"](https://www.st.cs.uni-saarland.de/papers/msr2005/), in *Proc. of the International Workshop on Mining Software Repositories*, May 17, 2005. 

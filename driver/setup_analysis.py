@@ -7,13 +7,13 @@ sys.path.append('.')
 from entree import project_crawler, project_cleanup
 import pipeline
 from dotenv import load_dotenv
-load_dotenv('token.env')
+load_dotenv('dev.env')
 
 def setup_data():
     BLACKLIST = ["apollo-client","lobe-chat", "kibana", "vee-validate","misskey", "keystone", "BuilderIO", "wechaty", "web3.js"]
     ACTUAL_RESULTS_COUNT = 0
     NEEDED_RESULTS_COUNT = int(os.getenv('NEEDED_RESULTS'))
-    page = 1
+    page = int(os.getenv('STARTING_PAGE'))
     per_page = int(os.getenv('RESULTS_PER_PAGE'))
     pull_github_projects = eval(os.getenv('PULL_GITHUB_PROJECTS'))
     light_pipeline = eval(os.getenv('LIGHT_PIPELINE'))
