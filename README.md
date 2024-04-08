@@ -1,6 +1,6 @@
 # Demo Run
 
-In order to setup the project, please follow these instructions below.
+In order to setup the project, please follow these instructions below. Currently, the `LIGHT_PIPELINE` version runs a single project and takes about 20mins in a 8GB RAM and i5-1035 CPU.
 
 ## Prerequisites
 - Have a Docker software installed since the SZZ runs on a container.
@@ -21,7 +21,7 @@ Using the `dev.env` file, setup the following variables to your local machine (i
 Once everything is set up, you can run the `Python` scripts:
 - It is recommended you create a `venv` using `python -m venv .venv`
 - Activate it `.venv/scripts/Activate` (may very based on OS)
-- Setup the libraries `python install -r requirements.txt`
+- Setup the libraries `pip install -r requirements.txt`
 - Install the npm dependencies `npm install`
 - Run `python ./driver/setup_analysis.py`
 - Run `python ./driver/execute_analysis.py`
