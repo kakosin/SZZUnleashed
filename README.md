@@ -1,6 +1,6 @@
 # Demo Run
 
-In order to setup the project, please follow these instructions below. Currently, the `LIGHT_PIPELINE` version runs a single project and takes about 20mins in a 8GB RAM and i5-1035 CPU.
+In order to setup the project, please follow these instructions below. Currently, the `LIGHT_PIPELINE` version runs a single project and takes about *5mins in a 8GB RAM and i5-1035 CPU*.
 
 ## Prerequisites
 - Have a Docker software installed since the SZZ runs on a container.
