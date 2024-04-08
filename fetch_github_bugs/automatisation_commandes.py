@@ -18,7 +18,7 @@ parent_folder = '/root/projet_tests' ## changer en '/output/git'
 
 root_git = '/output/git'
 
-load_dotenv('token.env')
+load_dotenv('dev.env')
 token = os.getenv('GITHUB_TOKEN')
 
 if token is None:

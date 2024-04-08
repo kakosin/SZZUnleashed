@@ -5,7 +5,7 @@ import os
 import time
 
 # Load Environment Variables
-load_dotenv('token.env')
+load_dotenv('dev.env')
 
 # Set Variables for your GitHub Advanced Search
 # Use https://github.com/search/advanced to test first and use the same text

@@ -28,7 +28,7 @@ command_pharo_ro = f"SZZImporter findFilesChangedByBugfixesFrom: '{local_root}/s
 projects_csv_path = rf'{local_root}\entree\Projects.csv'
 
 # Récupération du token GitHub à partir des variables d'environnement
-load_dotenv('token.env')
+load_dotenv('dev.env')
 github_token = os.environ.get("GITHUB_TOKEN")
 
 if github_token is None:

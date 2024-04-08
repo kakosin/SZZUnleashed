@@ -15,7 +15,7 @@
 ## 840 bogues (inclusivement) (28 pages) au total             ##
 ## (tout labels confondu)
 ################################################################
-## fichier token.env contenant un token github valide         ##
+## fichier dev.env contenant un token github valide         ##
 ## est requis pour que le script fonctionne                   ##
 ## GITHUB_TOKEN=<votre token>                                 ##
 ################################################################
@@ -32,7 +32,7 @@ import requests
 import sys
 
 # load token
-load_dotenv('token.env')
+load_dotenv('dev.env')
 token = os.getenv('GITHUB_TOKEN')
 
 if token is None:
