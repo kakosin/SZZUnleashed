@@ -1,7 +1,0 @@
-"Name","ClassOrMethod","LOC","CC"
-"Plugin","C","71","-"
-"updateCfgs","M","3","1"
-"getDefaultCfgs","M","2","1"
-"init","M","2","1"
-"getEvents","M","2","1"
-"destroy","M","9","1"

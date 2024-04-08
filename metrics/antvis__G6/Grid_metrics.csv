@@ -1,8 +1,0 @@
-"Name","ClassOrMethod","LOC","CC"
-"Grid","C","99","-"
-"getDefaultCfgs","M","6","1"
-"init","M","41","3"
-"getEvents","M","4","1"
-"updateGrid","M","13","4"
-"getContainer","M","2","1"
-"destroy","M","7","2"
