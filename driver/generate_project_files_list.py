@@ -1,42 +1,62 @@
 import subprocess
 import os
+import csv
 
-def creer_dossier_cible(dossier_base, nom_dossier_cible):
-    chemin_dossier_cible = os.path.join(os.path.dirname(dossier_base), nom_dossier_cible)
-    os.makedirs(chemin_dossier_cible, exist_ok=True)
-    return chemin_dossier_cible
+# Définition du dictionnaire de blacklist
+blacklist = {
+    'commence_par_point': lambda f: f.startswith('.'),
+    'un_seul_mot': lambda f: '/' not in f and '.' not in f,
+    'commence_par_tests': lambda f: f.startswith('__tests__/'),
+}
+
+extensions_autorisees = ['.ts', '.js', '.tsx']
 
 def lister_fichiers_git(chemin_projet):
+    """
+    Exécute git ls-files dans le répertoire du projet pour obtenir la liste des fichiers.
+    """
     try:
         result = subprocess.run(['git', 'ls-files'], cwd=chemin_projet, check=True, capture_output=True, text=True)
-        return result.stdout
+        return result.stdout.splitlines()
     except subprocess.CalledProcessError as e:
-        print(f"Erreur lors de l'exécution de git dans {chemin_projet}: {e}")
-        return None
+        print(f"Erreur lors de l'exécution de git ls-files dans {chemin_projet}: {e}")
+        return []
 
-def ecrire_fichiers_git(dossier_cible, projet, contenu):
+def fichier_valide(nom_fichier):
     """
-    Écrit le contenu dans un fichier spécifique au projet dans le dossier cible.
+    Vérifie si le fichier ne correspond à aucun critère de la blacklist et
+    appartient à la liste des extensions autorisées.
     """
-    chemin_sous_dossier_cible = os.path.join(dossier_cible, projet)
-    os.makedirs(chemin_sous_dossier_cible, exist_ok=True)
-    fichier_sortie = os.path.join(chemin_sous_dossier_cible, 'all_project_files.txt')
-    
-    with open(fichier_sortie, 'w') as f:
-        f.write(contenu)
+    # Vérifier d'abord la blacklist
+    for condition in blacklist.values():
+        if condition(nom_fichier):
+            return False
+    # Puis vérifier si l'extension est autorisée
+    return any(nom_fichier.endswith(ext) for ext in extensions_autorisees)
 
-def main(dossier_projets, nom_dossier_cible='result'):
-    # Chemin du dossier contenant les projets
-    # dossier_cible = creer_dossier_cible(dossier_projets, nom_dossier_cible)
-    
-    for projet in os.listdir(dossier_projets):
-        chemin_projet = os.path.join(dossier_projets, projet)
-        print("Creating project list for "+projet)
-        if os.path.isdir(chemin_projet):
-            contenu = lister_fichiers_git(chemin_projet)
-            if contenu is not None:
-                ecrire_fichiers_git(nom_dossier_cible, projet, contenu)
+def main(chemin_projet_source,chemin_projet_cible):
+    # Parcourir chaque sous-dossier (projet) dans le chemin source
+    for projet in os.listdir(chemin_projet_source):
+        chemin_complet_source = os.path.join(chemin_projet_source, projet)
+        if os.path.isdir(chemin_complet_source):
+            fichiers = lister_fichiers_git(chemin_complet_source)
+            fichiers_valides = [f for f in fichiers if fichier_valide(f)]
+            
+            # Préparer le chemin cible pour le fichier CSV du projet
+            chemin_complet_cible = os.path.join(chemin_projet_cible, projet)
+            os.makedirs(chemin_complet_cible, exist_ok=True)
+            fichier_csv_projet = os.path.join(chemin_complet_cible, 'liste_fichiers.csv')
+            
+            # Écriture des fichiers valides dans le fichier CSV
+            with open(fichier_csv_projet, 'w', newline='', encoding='utf-8') as csvfile:
+                writer = csv.writer(csvfile)
+                writer.writerow(['Nom du fichier'])  # En-tête du CSV
+                for fichier in fichiers_valides:
+                    writer.writerow([fichier])
+            
+            print(f"Liste des fichiers valides enregistrée dans '{fichier_csv_projet}'.")
 
 if __name__ == '__main__':
-    dossier_projets = "Project"
-    main()
+    chemin_projet_source = 'sortie/git'
+    chemin_projet_cible = 'sortie/results'
+    main(chemin_projet_source,chemin_projet_cible)

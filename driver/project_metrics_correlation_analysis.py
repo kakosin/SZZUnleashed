@@ -3,13 +3,6 @@ from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import roc_auc_score, roc_curve
 import matplotlib.pyplot as plt
-
-# TODO with other metadata from the projects
-import pandas as pd
-from sklearn.model_selection import train_test_split
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import roc_auc_score, roc_curve
-import matplotlib.pyplot as plt
 from pandas.errors import EmptyDataError 
 
 def tracer_auc_et_roc(data, features):
@@ -59,3 +52,6 @@ def run():
         print("Fichier vide")
     except pd.errors.ParserError:
         print("Erreur lors de l'analyse du fichier")
+
+if __name__ == "__main__":
+    run()
