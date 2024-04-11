@@ -17,33 +17,36 @@ def charger_et_filtrer_donnees_json(chemin_fichier_json):
     ]
     return donnees_filtrees
 
-def extraire_chemin_specifique(chemin_complet, pattern_recherche):
-    match = re.search(pattern_recherche, chemin_complet)
+def extraire_chemin_specifique(chemin_complet, nom_projet):
+    pattern_recherche = re.compile(re.escape(nom_projet) + r'/(.*)')
+    match = pattern_recherche.search(chemin_complet)
     if match:
-        return match.group(1) #chemin_complet[match.end():]  
-    return chemin_complet  
+        return match.group(1)
+    return chemin_complet
 
 def sauvegarder_donnees_csv(donnees, nom_projet, chemin_fichier_csv):
     champs = ['file_name', 'nameClass']
-    # motif_projet = re.compile(r'Project/[^/]+/')
-    motif_projet = re.compile(r".*"+nom_projet+r"/(.*)")
-    with open(chemin_fichier_csv, 'w', newline='') as fichier_csv:
+    with open(chemin_fichier_csv, 'w', newline='', encoding='utf-8') as fichier_csv:
         ecrivain = csv.writer(fichier_csv, delimiter=';')
         ecrivain.writerow(champs)
-        
+
         for item in donnees:
-            chemin_complet = item.get('fullyQualifiedName', '').split('"')[-2]
-            partie_chemin = extraire_chemin_specifique(chemin_complet, motif_projet)
-            partie_chemin = partie_chemin.replace('"', '').strip()  # Nettoie le chemin de tout guillemet et espace blanc
+            chemin_complet = item.get('fullyQualifiedName', '')
+
+            chemin_complet = chemin_complet.strip("\"").rsplit('.', 1)[0]
+            partie_chemin = extraire_chemin_specifique(chemin_complet, nom_projet)
             
-            ligne = [partie_chemin, item.get('name', '')]
+            partie_chemin = partie_chemin.replace('\"', '').strip()
+            
+            nom_classe = item.get('name', '')
+            
+            ligne = [partie_chemin, nom_classe]
             ecrivain.writerow(ligne)
 
 def traiter_fichier_json(chemin_fichier_json, nom_projet, dossier_sortie='processed_projects'):
     print("Analysing model: "+chemin_fichier_json)
     donnees_filtrees = charger_et_filtrer_donnees_json(chemin_fichier_json)
     
-    # nom_projet = os.path.splitext(os.path.basename(chemin_fichier_json))[0]
     dossier_projet_sortie = os.path.join(dossier_sortie, nom_projet)
     os.makedirs(dossier_projet_sortie, exist_ok=True)
     
@@ -54,13 +57,14 @@ def traiter_dossiers(dossier_racine, dossier_sortie):
     for racine, dossiers, fichiers in os.walk(dossier_racine):
         for fichier in fichiers:
             if fichier.endswith('.json') and os.path.splitext(fichier)[0] == os.path.basename(racine):
+                nom_projet = os.path.basename(racine)  
                 chemin_fichier_json = os.path.join(racine, fichier)
-                traiter_fichier_json(chemin_fichier_json, dossier_sortie)
+                traiter_fichier_json(chemin_fichier_json, nom_projet, dossier_sortie)
 
 def main(dossier_racine, dossier_sortie='processed_projects'):
     traiter_dossiers(dossier_racine, dossier_sortie)
 
 if __name__ == "__main__":
-    dossier_racine = 'sortie/backup_results'
+    dossier_racine = 'sortie/results'
     dossier_sortie = 'processed_projects'
     main(dossier_racine, dossier_sortie)
