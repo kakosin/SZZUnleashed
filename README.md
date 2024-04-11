@@ -7,7 +7,7 @@ In order to setup the project, please follow these instructions below. Currently
 - Have [`Python 3.12`](https://www.python.org/downloads/release/python-3120/) installed. The `requirements.txt` is provided.
 - Have [`NodeJS 21`](https://nodejs.org/en/download) installed. The `package.json` is provided.
 - Have [`PharoLauncher`](https://pharo.org/download) instaled.
-- In `Pharo` create a `Moose 10` image using the GUI.
+- In `Pharo` create a `Moose 10` image using the GUI. Name it `mgl843`.
 - Install [`FamixTypeScript`](https://fuhrmanator.github.io/2023/09/15/TypeScript-support-in-Moose.html) as per the Playground instructions.
 
 ## Setup
