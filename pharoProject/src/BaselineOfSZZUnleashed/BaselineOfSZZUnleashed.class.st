@@ -28,5 +28,4 @@ BaselineOfSZZUnleashed >> definePackages: spec [
 { #category : #baselines }
 BaselineOfSZZUnleashed >> defineGroups: spec [
 	spec group: 'default' with: #('MetricsAnalyzer' 'MetricsAnalyzer-Tests').
-	"Vous pouvez ajouter d'autres groupes si nécessaire"
 ]
