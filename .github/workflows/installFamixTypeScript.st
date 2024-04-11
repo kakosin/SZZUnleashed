@@ -1,6 +1,6 @@
 Metacello new 
-    githubUser: 'fuhrmanator' project: 'FamixTypeScript' commitish: 'master' path: 'src';
-    baseline: 'FamixTypeScript';
+    githubUser: 'carlospintogomez' project: 'SZZUnleashed' commitish: 'final_update' path: 'pharoProject/src';
+    baseline: 'SZZUnleashed';
     load.
-
+    
 Smalltalk snapshot: true andQuit: true.
