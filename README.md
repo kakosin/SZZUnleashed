@@ -1,8 +1,10 @@
 # Demo Run
 
-In order to setup the project, please follow these instructions below. Currently, the `LIGHT_PIPELINE` version runs a single project and takes about *5mins in a 8GB RAM and i5-1035 CPU*. 
+In order to setup the project, please follow these instructions below. Currently, the `LIGHT_PIPELINE` version runs a single project and takes about *5mins in a 8GB RAM and i5-1035 CPU*.
 
-**However, in case you need to debug, please look at the [GitHub pipeline](https://github.com/carlospintogomez/SZZUnleashed/actions/runs/8646472240) which successfully produces the correlation graph inside the archive analysis-artifacts in the artifacts section .**
+The project lives in GitHub [https://github.com/carlospintogomez/SZZUnleashed](https://github.com/carlospintogomez/SZZUnleashed)
+
+**However, in case you need to debug, please look at the [GitHub pipeline](https://github.com/carlospintogomez/SZZUnleashed/actions/runs/8662697296) which successfully produces the correlation graph inside the archive analysis-artifacts in the artifacts section .**
 
 ## Prerequisites
 - Have a Docker software installed since the SZZ runs on a container.
