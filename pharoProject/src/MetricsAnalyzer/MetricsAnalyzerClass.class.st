@@ -1,6 +1,10 @@
 Class {
 	#name : #MetricsAnalyzerClass,
 	#superclass : #Object,
+	#instVars : [
+		'modelPath',
+		'metricsFolderPath'
+	],
 	#category : #MetricsAnalyzer
 }
 
@@ -51,6 +55,30 @@ MetricsAnalyzerClass >> analyzeModelClasses: anIndex [
 ]
 
 { #category : #accessing }
+MetricsAnalyzerClass >> metricsFolderPath [
+
+	^ metricsFolderPath
+]
+
+{ #category : #accessing }
+MetricsAnalyzerClass >> metricsFolderPath: anObject [
+
+	metricsFolderPath := anObject
+]
+
+{ #category : #accessing }
+MetricsAnalyzerClass >> modelPath [
+
+	^ modelPath
+]
+
+{ #category : #accessing }
+MetricsAnalyzerClass >> modelPath: anObject [
+
+	modelPath := anObject
+]
+
+{ #category : #accessing }
 MetricsAnalyzerClass >> mooseModelAt: anIndex [
     ^MooseModel root at: anIndex
 
@@ -60,7 +88,7 @@ MetricsAnalyzerClass >> mooseModelAt: anIndex [
 MetricsAnalyzerClass >> writeCsvData: csvData forClass: className [
     | csvFileName csvFilePath |
     csvFileName := className, '_metrics.csv'.
-    csvFilePath := 'metrics/', csvFileName.
+    csvFilePath := metricsFolderPath, csvFileName.
 
     csvFilePath asFileReference writeStreamDo: [ :writeStream |
         (NeoCSVWriter on: writeStream)
