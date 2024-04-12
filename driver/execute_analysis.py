@@ -41,6 +41,7 @@ def run():
                 if not os.path.exists(metrics_folder):
                     os.mkdir(metrics_folder)
                 print("Producing pharo analysis for: "+model_filepath)
+                pharo_analysis.load_model(model_filepath)
                 pharo_analysis.analyse_model(model_filepath, metrics_folder)
 
     # Produce metrics
