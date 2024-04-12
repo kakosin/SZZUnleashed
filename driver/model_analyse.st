@@ -1,6 +1,6 @@
 | analyzer modelFilePath metricsFolderPath |
-modelFilePath := Smalltalk arguments at: 1.
-metricsFolderPath := Smalltalk arguments at: 2.
+modelFilePath := Smalltalk arguments at: 2.
+metricsFolderPath := Smalltalk arguments at: 3.
 
 analyzer := MetricsAnalyzerClass new.
 analyzer analyzeModel: modelFilePath metricsFolder: metricsFolderPath.
