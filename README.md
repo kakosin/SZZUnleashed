@@ -10,7 +10,8 @@ In order to setup the project, please follow these instructions below. Currently
 - Have [`NodeJS 21`](https://nodejs.org/en/download) installed. The `package.json` is provided.
 - Have [`PharoLauncher`](https://pharo.org/download) instaled.
 - In `Pharo` create a `Moose 10` image using the GUI. Name it `mgl843`.
-- Install [`FamixTypeScript`](https://fuhrmanator.github.io/2023/09/15/TypeScript-support-in-Moose.html) as per the Playground instructions.
+- Install `FamixTypeScript` by copy+pasting the `.github\workflows\installFamixTypeScript.st` script into the Moose Playground and running it.
+- Install `MetricsAnalyzer` by copy+pasting the `.github\workflows\installMetricsAnalyzer.st` script into the Moose Playground and running it.
 
 ## Setup
 Using the `dev.env` file, setup the following variables to your local machine (if on `Windows` use `/` instead of `\` in your paths):
@@ -21,12 +22,12 @@ Using the `dev.env` file, setup the following variables to your local machine (i
 
 ## Instructions to run
 Once everything is set up, you can run the `Python` scripts:
-- It is recommended you create a `venv` using `python -m venv .venv`
-- Activate it `.venv/scripts/Activate` (may very based on OS)
+- It is recommended you create a `venv` using `python -m venv .venv`.
+- Activate it `.venv/scripts/Activate` (may very based on OS).
 - Setup the libraries `pip install -r requirements.txt`
-- Install the npm dependencies `npm install`
-- Run `python ./driver/setup_analysis.py`
-- Run `python ./driver/execute_analysis.py`
+- Install the npm dependencies `npm install`. Aleternatively, you can force `npm install -g ts2famix@1.3.1`.
+- Run `python ./driver/setup_analysis.py`. Return code should be `0` if successful. If `1` please use the GitHub actions to help you debug.
+- Run `python ./driver/execute_analysis.py`.
 - Depending on your machine specifications, the pipeline execution may vary. The limiting hardware is the RAM and CPU, but mostly RAM.
 - If you wish to run the longer version set `LIGHT_PIPELINE` to `False`.
     

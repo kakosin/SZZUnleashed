@@ -62,6 +62,7 @@ jobs:
           wget -O- get.pharo.org/64/100+vm | bash
           ./pharo Pharo.image st .github/workflows/installMoose.st
           ./pharo Pharo.image st .github/workflows/installFamixTypeScript.st
+          ./pharo Pharo.image st .github/workflows/installMetricsAnalyzer.st
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Run code analysis
