@@ -43,9 +43,10 @@ MetricsAnalyzerClass >> analyzeClass: aClass [
 ]
 
 { #category : #'accessing - arguments' }
-MetricsAnalyzerClass >> analyzeModelClasses: anIndex [
+MetricsAnalyzerClass >> analyzeModelClasses [
     | tsModel allModelClasses |
-    tsModel := self mooseModelAt: anIndex.
+	 modelPath asFileReference readStreamDo:
+    [ :stream | tsModel := FamixTypeScriptModel new importFromJSONStream: stream. ].
     allModelClasses := tsModel allModelClasses.
 
     allModelClasses do: [ :class |
