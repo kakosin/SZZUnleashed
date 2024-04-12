@@ -1,5 +1,5 @@
 Metacello new 
-    githubUser: 'carlospintogomez' project: 'SZZUnleashed' commitish: 'integrate_pharo_2' path: 'pharoProject/src';
+    githubUser: 'carlospintogomez' project: 'SZZUnleashed' commitish: 'master' path: 'pharoProject/src';
     baseline: 'SZZUnleashed';
     load.
     
